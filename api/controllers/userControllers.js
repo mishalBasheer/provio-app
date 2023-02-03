@@ -3,7 +3,7 @@ import {
   generateToken,
   hashingPassword,
   isMatchPass,
-} from '../helpers/jwtHelpers.js';
+} from '../helpers/authHelpers.js';
 
 //Creating new user and encrypting the password and storing it in the database
 const newUser = async (req, res) => {
