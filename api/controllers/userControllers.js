@@ -1,14 +1,16 @@
 import User from '../models/userModel.js';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import {
+  generateToken,
+  hashingPassword,
+  isMatchPass,
+} from '../helpers/jwtHelpers.js';
 
 //Creating new user and encrypting the password and storing it in the database
 const newUser = async (req, res) => {
   try {
-    const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(
-      req.body.password,
-      salt
+    //hashing the password
+    const hashedPassword = hashingPassword(
+      req.body.password
     );
     const { name, email, mobile } = req.body;
     const result = await User.create({
@@ -17,7 +19,7 @@ const newUser = async (req, res) => {
       mobile,
       password: hashedPassword,
     });
-    res.json({
+    res.status(200).json({
       message: 'new User added successfully',
       result,
     });
@@ -30,7 +32,7 @@ const newUser = async (req, res) => {
 };
 
 //Authenticating User details while login
-const loginCheck = async (req, res, next) => {
+const loginCheck = async (req, res) => {
   try {
     const user = await User.findOne({
       mobile: req.body.mobile,
@@ -40,16 +42,15 @@ const loginCheck = async (req, res, next) => {
         .status(401)
         .json({ message: 'cannot find user' });
     if (
-      await bcrypt.compare(req.body.password, user.password)
+      isMatchPass(req.body.password,user.password)
     ) {
+      const payload = {
+        name: user.name,
+        userid: user._id,
+      };
       //Generating token after user password is authenticated (JWT)
-      const token = jwt.sign(
-        { name: user.name, userid: user._id },
-        process.env.JWT_SECRET_KEY,
-        {
-          expiresIn: '1h',
-        }
-      );
+      const token = generateToken(payload);
+
       res.status(200).json({ token, expiresIn: 3600 });
     } else {
       res.status(401).json({ message: 'wrong password' });
