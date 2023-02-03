@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NavToSigninComponent } from './auth/nav-to-signin/nav-to-signin.component';
-import { SigninComponent } from './auth/signin/signin.component';
-import { SignupComponent } from './auth/signup/signup.component';
-import { LandingPageComponent } from './landing/landing-page/landing-page.component';
+import { NavToSigninComponent } from './components/auth/nav-to-signin/nav-to-signin.component';
+import { SigninComponent } from './components/auth/signin/signin.component';
+import { SignupComponent } from './components/auth/signup/signup.component';
+import { LandingPageComponent } from './components/landing/landing-page/landing-page.component';
 
 const routes: Routes = [
-  { path: '', component: LandingPageComponent },
-  { path: 'signin', component: SigninComponent },
-  { path: 'signup', component: SignupComponent },
-  { path: 'login', component: NavToSigninComponent },
+  {path:'',component:LandingPageComponent},
+  {path:'signup',component:SignupComponent},
+  {path:'signin',component:SigninComponent},
+  {path:'login',component:NavToSigninComponent},
 ];
 
 @NgModule({
