@@ -15,6 +15,9 @@ import { TaskCardGroupComponent } from './components/reusable/cards/task-card-gr
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { SigninComponent } from './components/auth/signin/signin.component';
 import { NavToSigninComponent } from './components/auth/nav-to-signin/nav-to-signin.component';
+import { NavbarComponent } from './components/dashboard/navbar/navbar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -30,11 +33,14 @@ import { NavToSigninComponent } from './components/auth/nav-to-signin/nav-to-sig
     SignupComponent,
     SigninComponent,
     NavToSigninComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FlexLayoutModule,
+    BrowserAnimationsModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
