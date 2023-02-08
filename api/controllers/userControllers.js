@@ -37,13 +37,13 @@ const loginCheck = async (req, res) => {
     const user = await User.findOne({
       mobile: req.body.mobile,
     });
+    //if user exists
     if (!user)
       return res
         .status(401)
         .json({ message: 'cannot find user' });
-    if (
-      isMatchPass(req.body.password,user.password)
-    ) {
+        //if password matches
+    if (isMatchPass(req.body.password, user.password)) {
       const payload = {
         name: user.name,
         userid: user._id,
