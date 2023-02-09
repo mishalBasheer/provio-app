@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+<mat-drawer-container class="example-container">
+    <mat-drawer #drawer mode="side" opened>
+      <div class="bg-secondary w-44 h-auto ml-3 my-3 py-5 rounded-l-lg rounded-br-lg">
+        <ul class="color-accent font-light">
+          <li>
+            <a href="">
+              Dashboard
+            </a>
+          </li>
+          <li>
+            <a href="">
+              Broadcast
+            </a>
+          </li>
+          <li>
+            <a href="">
+              Roadmap
+            </a>
+          </li>
+          <li>
+            <a href="">
+              Timeline
+            </a>
+          </li>
+          <li>
+            <a href="">
+              Profile
+            </a>
+          </li>
+        </ul>
+      </div>
+    </mat-drawer>
+    <mat-drawer-content class="relative">
+
+    <app-home></app-home>
+    <app-orgs></app-orgs>
+    <app-projects></app-projects>
+    <app-boards></app-boards>
+    <app-tasks></app-tasks>
+    <app-users></app-users>
+
+      <button mat-raised-button (click)="drawer.toggle()" class="absolute top-0 my-3 bg-secondary color-light text-xs font-thin h-20 rounded-r-lg"><mat-icon>chevron_right</mat-icon></button>
+    </mat-drawer-content>
+  </mat-drawer-container>

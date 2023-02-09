@@ -18,6 +18,8 @@ import { NavToSigninComponent } from './components/auth/nav-to-signin/nav-to-sig
 import { NavbarComponent } from './components/dashboard/navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
+import { SidenavComponent } from './components/dashboard/sidenav/sidenav.component';
+import { BoardsComponent } from './components/dashboard/boards/boards.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { MaterialModule } from './material/material.module';
     SigninComponent,
     NavToSigninComponent,
     NavbarComponent,
+    SidenavComponent,
+    BoardsComponent,
   ],
   imports: [
     BrowserModule,
