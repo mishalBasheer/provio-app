@@ -9,4 +9,10 @@ export class StorageServiceService {
   addToken(token:string){
     localStorage.setItem('token',token);
   }
+  setTab(tab:string){
+    localStorage.setItem('currentTab',tab);
+  }
+  getTab(){
+    return localStorage.getItem('currentTab');
+  }
 }
