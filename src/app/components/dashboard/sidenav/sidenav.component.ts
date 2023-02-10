@@ -14,4 +14,7 @@ export class SidenavComponent implements OnInit {
       this.tab=data;
     });
   }
+  selectTab(tab:string){
+    this._tabService.onChangeSelect(tab);
+  }
 }

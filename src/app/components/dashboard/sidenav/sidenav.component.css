@@ -1,9 +1,9 @@
-li{
-    padding: 20px 20px;
+li {
+  padding: 20px 20px;
 }
-button:hover{
-    color: aliceblue;
+button:hover {
+  color: aliceblue;
 }
-.side-nav::-webkit-scrollbar{
-display: none
+.side-nav::-webkit-scrollbar {
+  display: none;
 }
