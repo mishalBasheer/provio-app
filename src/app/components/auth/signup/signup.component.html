@@ -33,6 +33,18 @@
                   name="fname"
                   formControlName="fname"
                 />
+                <div
+                  *ngIf="
+                    signUpForm.get('fname')?.touched &&
+                    signUpForm.get('fname')?.invalid
+                  "
+                >
+                  <div
+                    *ngIf="signUpForm.get('fname')?.errors?.['required']"
+                  >
+                    First name is required
+                  </div>
+                </div>
               </div>
               <div class="mb-4 w-1/2">
                 <label
@@ -48,6 +60,18 @@
                   placeholder="Smith"
                   formControlName="lname"
                 />
+                <div
+                  *ngIf="
+                    signUpForm.get('lname')?.touched &&
+                    signUpForm.get('lname')?.invalid
+                  "
+                >
+                  <div
+                    *ngIf="signUpForm.get('lname')?.errors?.['required']"
+                  >
+                    last name is required
+                  </div>
+                </div>
               </div>
             </div>
             <div class="mb-4">
@@ -64,6 +88,18 @@
                 placeholder="user@example.com"
                 formControlName="email"
               />
+              <div
+                *ngIf="
+                  signUpForm.get('email')?.touched &&
+                  signUpForm.get('email')?.invalid
+                "
+              >
+                <div
+                  *ngIf="signUpForm.get('email')?.errors?.['required']"
+                >
+                  Email is required
+                </div>
+              </div>
             </div>
             <div class="mb-6">
               <label
@@ -79,6 +115,23 @@
                 placeholder="***************"
                 formControlName="password"
               />
+              <div
+                *ngIf="
+                  signUpForm.get('password')?.touched &&
+                  signUpForm.get('password')?.invalid
+                "
+              >
+                <div
+                  *ngIf="signUpForm.get('password')?.errors?.['required']"
+                >
+                  Password is required
+                </div>
+                <div
+                  *ngIf="signUpForm.get('password')?.errors?.['minlength']"
+                >
+                  Password should be min 6 characters
+                </div>
+              </div>
             </div>
             <div class="mb-4">
               <label
@@ -93,6 +146,23 @@
                 type="text"
                 formControlName="orgName"
               />
+              <div
+                *ngIf="
+                  signUpForm.get('orgName')?.touched &&
+                  signUpForm.get('orgName')?.invalid
+                "
+              >
+                <div
+                  *ngIf="signUpForm.get('orgName')?.errors?.['required']"
+                >
+                  orgName is required
+                </div>
+                <div
+                  *ngIf="signUpForm.get('orgName')?.errors?.['minlength']"
+                >
+                  orgName should be min 3 characters
+                </div>
+              </div>
             </div>
             <div class="mb-6">
               <div class="grid sm:grid-cols-2 gap-4">
