@@ -12,11 +12,14 @@ import { UsersComponent } from './components/dashboard/users/users.component';
 import { LandingPageComponent } from './components/landing/landing-page/landing-page.component';
 
 const routes: Routes = [
-  {path:'',component:LandingPageComponent},
-  {path:'signup',component:SignupComponent},
-  {path:'signin',component:SigninComponent},
-  {path:'login',component:NavToSigninComponent},
-  {path:'workspace',component:SidenavComponent},
+  { path: '', component: LandingPageComponent },
+  {
+    path: 'auth',
+    loadChildren: () => import('./components/auth/auth.module').then(
+        (m) => m.AuthModule
+      ),
+  },
+  { path: 'workspace', component: SidenavComponent },
 ];
 
 @NgModule({

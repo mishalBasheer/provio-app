@@ -1,0 +1,7 @@
+export interface UserSignup{
+    fname:string;
+    lname:string;
+    email:string;
+    password:string;
+    orgName:string;
+}
