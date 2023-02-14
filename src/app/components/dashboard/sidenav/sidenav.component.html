@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <mat-drawer-container class="example-container">
-    <mat-drawer #drawer mode="side" opened>
+    <mat-drawer #drawer mode="side" opened class="bg-white">
       <div class="overflow-hidden bg-secondary w-44 h-auto ml-3 my-3 py-5 rounded-l-lg rounded-br-lg">
         <ul class="color-accent font-light">
           <li>
@@ -31,7 +31,7 @@
         </ul>
       </div>
     </mat-drawer>
-    <mat-drawer-content class="relative">
+    <mat-drawer-content class="relative bg-white color-primary">
 
     <app-home *ngIf="tab==='home'"></app-home>
     <app-orgs *ngIf="tab==='orgs'"></app-orgs>
