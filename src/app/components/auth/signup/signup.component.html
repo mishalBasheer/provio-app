@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="w-full max-w-lg mr-auto ml-auto mt-14">
-        <form [formGroup]="signUpForm">
+        <form [formGroup]="signUpForm" (ngSubmit)="userSignUp()">
           <div class="px-3 pb-8 mb-4 ml-auto mr-auto">
             <div class="flex gap-6">
               <div class="mb-4 w-1/2">
@@ -33,7 +33,7 @@
                   name="fname"
                   formControlName="fname"
                 />
-                <div
+                <div class="text-red-400"
                   *ngIf="
                     signUpForm.get('fname')?.touched &&
                     signUpForm.get('fname')?.invalid
@@ -60,7 +60,7 @@
                   placeholder="Smith"
                   formControlName="lname"
                 />
-                <div
+                <div class="text-red-400"
                   *ngIf="
                     signUpForm.get('lname')?.touched &&
                     signUpForm.get('lname')?.invalid
@@ -88,7 +88,7 @@
                 placeholder="user@example.com"
                 formControlName="email"
               />
-              <div
+              <div class="text-red-400"
                 *ngIf="
                   signUpForm.get('email')?.touched &&
                   signUpForm.get('email')?.invalid
@@ -115,7 +115,7 @@
                 placeholder="***************"
                 formControlName="password"
               />
-              <div
+              <div class="text-red-400"
                 *ngIf="
                   signUpForm.get('password')?.touched &&
                   signUpForm.get('password')?.invalid
@@ -146,7 +146,7 @@
                 type="text"
                 formControlName="orgName"
               />
-              <div
+              <div class="text-red-400"
                 *ngIf="
                   signUpForm.get('orgName')?.touched &&
                   signUpForm.get('orgName')?.invalid
@@ -182,7 +182,7 @@
               <button
                 type="submit"
                 class="bg-accent max-h-10 hover:bg-cyan-600 shadow-lg text-white font-normal text-sm py-3 px-0 rounded text-center w-full hover:bg-tertiary duration-200 transition-all"
-              >
+                >
                 Sign in
               </button>
             </div>

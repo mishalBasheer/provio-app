@@ -12,6 +12,7 @@ import {
 })
 export class SignupComponent implements OnInit {
   signUpForm!: FormGroup;
+  constructor(){}
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
       fname: new FormControl(null, [Validators.required]),
@@ -29,5 +30,12 @@ export class SignupComponent implements OnInit {
         Validators.minLength(3),
       ]),
     });
+  }
+  userSignUp(){
+    if(this.signUpForm.invalid){
+      return;
+    }
+    console.log(this.signUpForm.value);
+    
   }
 }
