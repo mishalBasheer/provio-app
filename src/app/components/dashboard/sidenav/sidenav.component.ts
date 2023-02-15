@@ -7,14 +7,8 @@ import { UtilityServiceService } from 'src/app/services/Utility-services/utility
   styleUrls: ['./sidenav.component.css'],
 })
 export class SidenavComponent implements OnInit {
-  tab!: string | null;
-  constructor(private _tabService: UtilityServiceService) {}
+  
+  constructor() {}
   ngOnInit(): void {
-    this._tabService.onGetSelect().subscribe(data=>{
-      this.tab=data;
-    });
-  }
-  selectTab(tab:string){
-    this._tabService.onChangeSelect(tab);
   }
 }

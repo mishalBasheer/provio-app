@@ -5,6 +5,7 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from 'src/app/material/material.module';
@@ -24,7 +25,7 @@ const routes: Routes = [
     path: '',
     component: SidenavComponent,
     children: [
-      { path: 'home', component: HomeComponent },
+      { path: '', component: HomeComponent },
       { path: 'boards', component: BoardsComponent },
       { path: 'orgs', component: OrgsComponent },
       { path: 'projects', component: ProjectsComponent },
@@ -52,7 +53,6 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    BrowserAnimationsModule,
     MaterialModule,
     RouterModule.forChild(routes),
   ],

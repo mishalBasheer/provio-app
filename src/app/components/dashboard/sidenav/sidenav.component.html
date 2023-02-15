@@ -1,45 +1,48 @@
 <app-navbar></app-navbar>
 <mat-drawer-container class="example-container">
-    <mat-drawer #drawer mode="side" opened class="bg-white">
-      <div class="overflow-hidden bg-secondary w-44 h-auto ml-3 my-3 py-5 rounded-l-lg rounded-br-lg">
-        <ul class="color-accent font-light">
-          <li>
-            <button (click)="selectTab('dashboard')">
-              Dashboard
-            </button>
-          </li>
-          <li>
-            <button (click)="selectTab('broadcast')">
-              Broadcast
-            </button>
-          </li>
-          <li>
-            <button (click)="selectTab('roadmap')">
-              Roadmap
-            </button>
-          </li>
-          <li>
-            <button (click)="selectTab('timeline')">
-              Timeline
-            </button>
-          </li>
-          <li>
-            <button (click)="selectTab('profile')">
-              Profile
-            </button>
-          </li>
-        </ul>
-      </div>
-    </mat-drawer>
-    <mat-drawer-content class="relative bg-white color-primary">
-
-    <app-home *ngIf="tab==='home'"></app-home>
-    <app-orgs *ngIf="tab==='orgs'"></app-orgs>
-    <app-projects *ngIf="tab==='projects'"></app-projects>
-    <app-boards *ngIf="tab==='boards'"></app-boards>
-    <app-tasks *ngIf="tab==='tasks'"></app-tasks>
-    <app-users *ngIf="tab==='users'"></app-users>
-
-      <button mat-raised-button (click)="drawer.toggle()" class="absolute top-0 my-3 bg-secondary color-light text-xs font-thin h-20 rounded-r-lg"><mat-icon>chevron_right</mat-icon></button>
-    </mat-drawer-content>
-  </mat-drawer-container>
+  <mat-drawer #drawer mode="side" opened class="bg-white">
+    <div
+      class="overflow-hidden bg-secondary w-44 h-auto ml-3 my-3 py-5 rounded-l-lg rounded-br-lg"
+    >
+      <ul class="color-accent font-light">
+        <li>
+          <button [routerLink]="['dashboard']">
+            Dashboard
+          </button>
+        </li>
+        <li>
+          <button [routerLink]="['broadcast']">
+            Broadcast
+          </button>
+        </li>
+        <li>
+          <button [routerLink]="['roadmap']">
+            Roadmap
+          </button>
+        </li>
+        <li>
+          <button [routerLink]="['timeline']">
+            Timeline
+          </button>
+        </li>
+        <li>
+          <button [routerLink]="['profile']">
+            Profile
+          </button>
+        </li>
+      </ul>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content
+    class="relative bg-white color-primary"
+  >
+    <router-outlet></router-outlet>
+    <button
+      mat-raised-button
+      (click)="drawer.toggle()"
+      class="absolute top-0 my-3 bg-secondary color-light text-xs font-thin h-20 rounded-r-lg"
+    >
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </mat-drawer-content>
+</mat-drawer-container>
