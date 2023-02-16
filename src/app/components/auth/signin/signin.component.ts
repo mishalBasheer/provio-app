@@ -6,6 +6,7 @@ import {
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
+import { setLoadingSpinner } from 'src/app/store/shared/shared.action';
 import { loginStart } from '../state/auth.action';
 
 @Component({
@@ -33,6 +34,7 @@ export class SigninComponent {
     }
     const email = this.signInForm.value.email;
     const password = this.signInForm.value.password;
+    this.store.dispatch(setLoadingSpinner({status:true}));
     this.store.dispatch(loginStart({ email, password }));
   }
 }

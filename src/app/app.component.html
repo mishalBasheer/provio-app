@@ -1,2 +1,10 @@
-<router-outlet></router-outlet>
-<app-loding-spinner></app-loding-spinner>
+<div>
+  <app-error-dialog
+    *ngIf="showErrorMsg | async"
+    [errMsg]="showErrorMsg | async"
+  ></app-error-dialog>
+  <router-outlet></router-outlet>
+  <app-loding-spinner
+    *ngIf="showLoading | async"
+  ></app-loding-spinner>
+</div>

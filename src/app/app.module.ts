@@ -12,14 +12,17 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClientModule } from '@angular/common/http';
 import { LodingSpinnerComponent } from './shared/loding-spinner/loding-spinner.component';
 import { AppReducer } from './store/app.state';
+import { ErrorDialogComponent } from './shared/error-dialog/error-dialog.component';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
-  declarations: [AppComponent, LandingPageComponent, LodingSpinnerComponent],
+  declarations: [AppComponent, LandingPageComponent, LodingSpinnerComponent, ErrorDialogComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FlexLayoutModule,
+    MaterialModule,
     HttpClientModule,
     EffectsModule.forRoot([]),
     StoreModule.forRoot(AppReducer),
