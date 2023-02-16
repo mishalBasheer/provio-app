@@ -1,15 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
-import {
-  Actions,
-  createEffect,
-  ofType,
-} from '@ngrx/effects';
-import {
-  mergeMap,
-  map,
-  catchError,
-  tap,
-} from 'rxjs/operators';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { mergeMap, map, catchError, tap } from 'rxjs/operators';
 import { AppState } from 'src/app/store/app.state';
 import { AuthService } from '../auth.service';
 import { loginStart, loginSuccess } from './auth.action';
@@ -39,36 +30,24 @@ export class AuthEffects {
       ofType(loginStart),
       mergeMap((action) => {
         //calling auth service
-        return this.authService
-          .login(action.email, action.password)
-          .pipe(
-            map((data) => {
-              //loading spinner set false
-              this.store.dispatch(
-                setLoadingSpinner({ status: false })
-              );
-              this.store.dispatch(
-                setErrorMessage({ message: '' })
-              );
-              //on user login fomating the user
-              const user =
-                this.authService.formatUser(data);
-              //funciton call to save the user on the state
-              return loginSuccess({ user });
-            }),
-            catchError((errResponse) => {
-              this.store.dispatch(
-                setLoadingSpinner({ status: false })
-              );
-              const errorMsg =
-                this.sharedService.getErroMsg(
-                  errResponse.error.message
-                );
-              return of(
-                setErrorMessage({ message: errorMsg })
-              );
-            })
-          );
+        return this.authService.login(action.email, action.password).pipe(
+          map((data) => {
+            //loading spinner set false
+            this.store.dispatch(setLoadingSpinner({ status: false }));
+            this.store.dispatch(setErrorMessage({ message: '' }));
+            //on user login fomating the user
+            const user = this.authService.formatUser(data);
+            //funciton call to save the user on the state
+            return loginSuccess({ user });
+          }),
+          catchError((errResponse) => {
+            this.store.dispatch(setLoadingSpinner({ status: false }));
+            const errorMsg = this.sharedService.getErroMsg(
+              errResponse.error.message
+            );
+            return of(setErrorMessage({ message: errorMsg }));
+          })
+        );
       })
     );
   });
@@ -76,7 +55,7 @@ export class AuthEffects {
     () => {
       return this.action$.pipe(
         ofType(loginSuccess),
-        tap((action) => {
+        tap(() => {
           this.router.navigate(['/workspace']);
         })
       );

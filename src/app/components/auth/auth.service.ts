@@ -21,7 +21,6 @@ export class AuthService {
     email: string,
     password: string
   ): Observable<AuthResponseData> {
-    console.log(email,password);
     return this.http.post<AuthResponseData>(
       environment.apiUrl + 'user/signin',
       { email, password }

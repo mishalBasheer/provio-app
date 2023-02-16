@@ -34,7 +34,6 @@ const routes: Routes = [
   imports: [
     CommonModule,
     EffectsModule.forFeature([AuthEffects]),
-    StoreModule.forFeature(AUTH_STATE_NAME,AuthReducer),
     RouterModule.forChild(routes),
     FormsModule,
     ReactiveFormsModule,
