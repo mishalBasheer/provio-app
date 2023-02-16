@@ -45,26 +45,35 @@
   <div class="mx-28 md:flex justify-between">
     <div class="flex-1 sm:py-10 md:py-48">
       <h1 class="text-3xl md:text-6xl font-light pb-2">
-        Provio <br> Tasks Done Right!
+        Provio <br />
+        Tasks Done Right!
       </h1>
       <p class="font-normal pb-2">
         Project Management application with a minimalist UI.
       </p>
       <ul>
-        <li class="pb-1"><i class="fa-solid fa-check mx-2"></i>Simple and User friendly</li>
-        <li class="pb-1"><i class="fa-solid fa-check mx-2"></i>Support for multiple Orgs</li>
-        <li class="pb-1"><i class="fa-solid fa-check mx-2"></i>Role based access control</li>
+        <li class="pb-1">
+          <i class="fa-solid fa-check mx-2"></i>Simple and
+          User friendly
+        </li>
+        <li class="pb-1">
+          <i class="fa-solid fa-check mx-2"></i>Support for
+          multiple Orgs
+        </li>
+        <li class="pb-1">
+          <i class="fa-solid fa-check mx-2"></i>Role based
+          access control
+        </li>
       </ul>
       <div class="flex">
-        
-        <a
-        href="/signup"
+        <a href="#"
+          [routerLink]="['/auth/signup']"
           class="bg-accent max-h-10 hover:bg-cyan-600 shadow-lg text-white font-normal text-sm py-3 px-5 rounded text-center hover:bg-tertiary duration-200 transition-all"
         >
           Create New Account
         </a>
-        <a
-          href="/login"
+        <a href="#"
+          [routerLink]="['/auth/signin']"
           class="bg-white ml-5 max-h-10 hover:bg-slate-400 hover:text-white shadow-lg color-primary font-normal text-sm py-3 px-5 rounded text-center hover:bg-tertiary duration-200 transition-all"
         >
           Login
@@ -85,20 +94,52 @@
 <!--  -->
 <!-- Explore Features Section Start -->
 <section class="bg-light pb-10">
-    <div class="text-center py-20 md:pt-0">
-        <h1 class="text-3xl">Explore Features</h1>
-        <p>A lot of cool features with a stress on minimalism</p>
-    </div>
+  <div class="text-center py-20 md:pt-0">
+    <h1 class="text-3xl">Explore Features</h1>
+    <p>
+      A lot of cool features with a stress on minimalism
+    </p>
+  </div>
   <div class="mx-8 md:flex md:justify-center color-light">
     <div class="md:w-1/3 sm:mx-auto sm:w-2/3">
-      <div class="bg-secondary p-3 mb-5 rounded-lg"><i class="fa-regular fa-circle-check color-accent mx-2"></i>Multiple Orgs</div>
-      <div class="bg-secondary p-3 mb-5 rounded-lg"><i class="fa-regular fa-circle-check color-accent mx-2"></i>Invite Users</div>
-      <div class="bg-secondary p-3 mb-5 rounded-lg"><i class="fa-regular fa-circle-check color-accent mx-2"></i>Attachments</div>
+      <div class="bg-secondary p-3 mb-5 rounded-lg">
+        <i
+          class="fa-regular fa-circle-check color-accent mx-2"
+        ></i
+        >Multiple Orgs
+      </div>
+      <div class="bg-secondary p-3 mb-5 rounded-lg">
+        <i
+          class="fa-regular fa-circle-check color-accent mx-2"
+        ></i
+        >Invite Users
+      </div>
+      <div class="bg-secondary p-3 mb-5 rounded-lg">
+        <i
+          class="fa-regular fa-circle-check color-accent mx-2"
+        ></i
+        >Attachments
+      </div>
     </div>
     <div class="md:w-1/3 sm:mx-auto sm:w-2/3">
-        <div class="bg-secondary p-3 mb-5 rounded-lg"><i class="fa-regular fa-circle-check color-accent mx-2"></i>Kanban Board</div>
-        <div class="bg-secondary p-3 mb-5 rounded-lg"><i class="fa-regular fa-circle-check color-accent mx-2"></i>Role based access</div>
-        <div class="bg-secondary p-3 mb-5 rounded-lg"><i class="fa-regular fa-circle-check color-accent mx-2"></i>Simple user management</div>
+      <div class="bg-secondary p-3 mb-5 rounded-lg">
+        <i
+          class="fa-regular fa-circle-check color-accent mx-2"
+        ></i
+        >Kanban Board
+      </div>
+      <div class="bg-secondary p-3 mb-5 rounded-lg">
+        <i
+          class="fa-regular fa-circle-check color-accent mx-2"
+        ></i
+        >Role based access
+      </div>
+      <div class="bg-secondary p-3 mb-5 rounded-lg">
+        <i
+          class="fa-regular fa-circle-check color-accent mx-2"
+        ></i
+        >Simple user management
+      </div>
     </div>
   </div>
 </section>
@@ -109,16 +150,27 @@
 <footer class="bg-light pb-5 px-5">
   <div class="flex">
     <div>
-        <img
-          src="/assets/images/logo-dark.png"
-          alt=""
-          class="w-10 mx-3"
-        />
-      </div>
-      <div class="flex items-center text-xl font-medium">Provio</div>
-      <div class="flex items-center ml-10 text-xs font-light">
-        <p><i class="fa-regular fa-copyright"></i> 2023 Provio -</p><a href="https://github.com/mishalBasheer" class="color-accent"> Mohammed Mishal</a>
-      </div>
+      <img
+        src="/assets/images/logo-dark.png"
+        alt=""
+        class="w-10 mx-3"
+      />
+    </div>
+    <div class="flex items-center text-xl font-medium">
+      Provio
+    </div>
+    <div class="flex items-center ml-10 text-xs font-light">
+      <p>
+        <i class="fa-regular fa-copyright"></i> 2023 Provio
+        -
+      </p>
+      <a
+        href="https://github.com/mishalBasheer"
+        class="color-accent"
+      >
+        Mohammed Mishal</a
+      >
+    </div>
   </div>
 </footer>
 <!-- Footer Section end -->

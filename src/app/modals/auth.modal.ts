@@ -1,7 +1,8 @@
-export interface UserSignup{
-    fname:string;
-    lname:string;
-    email:string;
-    password:string;
-    orgName:string;
+export interface AuthResponseData{
+    token:string;
+    expiresIn:number;
+    user:{
+        name:string;
+        userid:string;
+    };
 }

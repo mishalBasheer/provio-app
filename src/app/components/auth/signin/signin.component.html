@@ -1,83 +1,119 @@
-  <div
-    class="relative md:h-screen flex-1 items-center content-center bg-light"
-  >
-    <div class="mr-auto ml-auto w-full py-16">
-      <div class="bg-secondary w-1/3 mr-auto ml-auto rounded-3xl shadow-2xl shadow-cyan-900">
+<div
+  class="relative md:h-screen flex-1 items-center content-center bg-light"
+>
+  <div class="mr-auto ml-auto w-full py-16">
+    <div
+      class="bg-secondary w-1/3 mr-auto ml-auto rounded-3xl shadow-2xl shadow-cyan-900"
+    >
       <div class="w-full max-w-md mr-auto ml-auto pt-8">
         <div class="flex justify-center gap-6">
-          <div  class="w-3/12">
-            <img src="/assets/images/logo.png" alt="">
-
+          <div class="w-3/12">
+            <img src="/assets/images/logo.png" alt="" />
           </div>
           <div class="flex items-center">
-
-            <h1 class="text-6xl color-light ">Provio</h1>
+            <h1 class="text-6xl color-light">Provio</h1>
           </div>
-      </div>
+        </div>
       </div>
       <div class="w-full max-w-sm mr-auto ml-auto mt-14">
-        <div
-          class="px-3 pb-8 mb-4 ml-auto mr-auto"
-        >
-        <div class="mb-4">
-          <label
-            class="block color-light text-sm font-light mb-1"
-            for="username"
+        <div class="px-3 pb-8 mb-4 ml-auto mr-auto">
+          <form
+            [formGroup]="signInForm"
+            (ngSubmit)="onLogin()"
           >
-            Email address
-          </label>
-          <input
-            class="shadow-sm max-h-10 appearance-none border border-gray-400 rounded w-full py-4 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:border-indigo-300"
-            id="username"
-            type="text"
-            placeholder="user@example.com"
-          />
-        </div>
-          <div class="mb-6">
-            <label
-              class="block color-light text-sm font-light mb-1"
-              for="username"
-            >
-              Password
-            </label>
-            <input
-              class="shadow-sm max-h-10 appearance-none border border-gray-400 rounded w-full py-4 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:border-indigo-300"
-              id="password"
-              type="password"
-              placeholder="***************"
-            />
-          </div>
-          <div class="mb-6">
-            <div class="grid sm:grid-cols-2 gap-4">
-              <div class="text-center sm:text-left">
-                <label>
-                  <input type="checkbox" class="mr-2" />
-                  <span
-                    class="text-sm font-light color-light"
-                    >Remember me</span
-                  >
-                </label>
+            <div class="mb-4">
+              <label
+                class="block color-light text-sm font-light mb-1"
+                for="username"
+              >
+                Email address
+              </label>
+              <input
+                class="shadow-sm max-h-10 appearance-none border border-gray-400 rounded w-full py-4 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:border-indigo-300"
+                id="username"
+                type="text"
+                placeholder="user@example.com"
+                formControlName="email"
+              />
+              <div
+                class="text-red-400"
+                *ngIf="
+                  signInForm.get('email')?.touched &&
+                  signInForm.get('email')?.invalid
+                "
+              >
+                <div
+                  *ngIf="signInForm.get('email')?.errors?.['required']"
+                >
+                  Email is required
+                </div>
               </div>
             </div>
-          </div>
-          <div class="mb-6">
-            <a
-              href="/workspace"
-              class="bg-accent max-h-10 hover:bg-cyan-600 shadow-lg text-white font-normal text-sm py-3 px-10 rounded text-center w-full hover:bg-tertiary duration-200 transition-all"
-            >
-              Sign in
-            </a>
-          </div>
-          
-          <div class="text-center color-light font-light">
-            Don't have an account yet? <a
-              href="/signup"
-              class="color-accent font-light text-sm duration-200 transition-colors hover:text-cyan-600"
-              >Signup</a
-            >
-          </div>
+            <div class="mb-6">
+              <label
+                class="block color-light text-sm font-light mb-1"
+                for="username"
+              >
+                Password
+              </label>
+              <input
+                class="shadow-sm max-h-10 appearance-none border border-gray-400 rounded w-full py-4 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:border-indigo-300"
+                id="password"
+                type="password"
+                placeholder="***************"
+                formControlName="password"
+              />
+              <div
+                class="text-red-400"
+                *ngIf="
+                  signInForm.get('password')?.touched &&
+                  signInForm.get('password')?.invalid
+                "
+              >
+                <div
+                  *ngIf="signInForm.get('password')?.errors?.['required']"
+                >
+                  Password is required
+                </div>
+                <div
+                  *ngIf="signInForm.get('password')?.errors?.['minlength']"
+                >
+                  Password should be min 6 characters
+                </div>
+              </div>
+            </div>
+            <div class="mb-6">
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div class="text-center sm:text-left">
+                  <label>
+                    <input type="checkbox" class="mr-2" />
+                    <span
+                      class="text-sm font-light color-light"
+                      >Remember me</span
+                    >
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="mb-6">
+              <button
+                type="submit"
+                class="bg-accent max-h-10 hover:bg-cyan-600 shadow-lg text-white font-normal text-sm py-3 px-10 rounded text-center w-full hover:bg-tertiary duration-200 transition-all"
+              >
+                Sign in
+              </button>
+            </div>
+            <div class="text-center color-light font-light">
+              Don't have an account yet?
+              <a
+                [routerLink]="['/auth/signup']"
+                class="color-accent font-light text-sm duration-200 transition-colors hover:text-cyan-600"
+                >Signup</a
+              >
+            </div>
+          </form>
         </div>
       </div>
     </div>
-    </div>
   </div>
+</div>
