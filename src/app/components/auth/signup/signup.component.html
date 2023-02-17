@@ -10,7 +10,7 @@
             <img src="/assets/images/logo.png" alt="" />
           </div>
           <div class="flex items-center">
-            <h1 class="text-6xl color-light">Provio</h1>
+            <p class="text-6xl color-light">Provio</p>
           </div>
         </div>
       </div>
@@ -99,6 +99,11 @@
                 >
                   Email is required
                 </div>
+                <div
+                  *ngIf="signUpForm.get('email')?.errors?.['email']"
+                >
+                  Email is invalid
+                </div>
               </div>
             </div>
             <div class="mb-6">
@@ -144,7 +149,7 @@
                 class="shadow-sm max-h-10 appearance-none border border-gray-400 rounded w-2/3 py-4 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:border-indigo-300"
                 id="orgname"
                 type="text"
-                formControlName="orgName"
+                formControlName="org"
               />
               <div class="text-red-400"
                 *ngIf="
@@ -190,7 +195,7 @@
             <div class="text-center color-light font-light">
               Already have an account?
               <a
-                href="/signin"
+                href="#" [routerLink]="['/auth/signin']"
                 class="color-accent font-light text-sm duration-200 transition-colors hover:text-cyan-600"
                 >Login</a
               >

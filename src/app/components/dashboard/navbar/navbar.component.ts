@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/store/app.state';
+import { autoLogout } from '../../auth/state/auth.action';
 
 @Component({
   selector: 'app-navbar',
@@ -6,5 +9,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  constructor() {}
+  constructor(private store: Store<AppState>) {}
+  onLogout(event: Event) {
+    event.preventDefault();
+    this.store.dispatch(autoLogout());
+  }
 }

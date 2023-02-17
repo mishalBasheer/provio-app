@@ -1,18 +1,10 @@
 import { Injectable } from '@angular/core';
+import { User } from 'src/app/modals/user.modal';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StorageServiceService {
+  constructor() {}
 
-  constructor() { }
-  addToken(token:string){
-    localStorage.setItem('token',token);
-  }
-  setTab(tab:string){
-    localStorage.setItem('currentTab',tab);
-  }
-  getTab(){
-    return localStorage.getItem('currentTab');
-  }
 }

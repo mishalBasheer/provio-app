@@ -33,6 +33,3 @@ body {
 .bg-light {
   background-color: #eeeeee;
 }
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

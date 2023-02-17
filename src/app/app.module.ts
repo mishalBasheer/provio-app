@@ -14,6 +14,7 @@ import { LodingSpinnerComponent } from './shared/loding-spinner/loding-spinner.c
 import { AppReducer } from './store/app.state';
 import { ErrorDialogComponent } from './shared/error-dialog/error-dialog.component';
 import { MaterialModule } from './material/material.module';
+import { AuthEffects } from './components/auth/state/auth.effects';
 
 @NgModule({
   declarations: [AppComponent, LandingPageComponent, LodingSpinnerComponent, ErrorDialogComponent],
@@ -24,7 +25,7 @@ import { MaterialModule } from './material/material.module';
     FlexLayoutModule,
     MaterialModule,
     HttpClientModule,
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([AuthEffects]),
     StoreModule.forRoot(AppReducer),
     StoreDevtoolsModule.instrument({
       logOnly: !isDevMode(),
