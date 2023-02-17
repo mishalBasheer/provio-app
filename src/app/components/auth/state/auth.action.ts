@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { SignUpData } from 'src/app/modals/auth.modal';
-import { User } from 'src/app/modals/user.modal';
+import { SignUpData } from 'src/app/models/auth.model';
+import { User } from 'src/app/models/user.model';
 
 export const LOGIN_START = '[auth page] login start';
 export const LOGIN_SUCCESS = '[auth page] login success';

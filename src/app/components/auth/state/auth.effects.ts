@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { mergeMap, map, catchError, tap } from 'rxjs/operators';
 import { AppState } from 'src/app/store/app.state';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../../services/auth.service';
 import {
   autoLogin,
   autoLogout,
@@ -81,7 +81,7 @@ export class AuthEffects {
         return this.authService
           .signup({ fname, lname, email, password, org })
           .pipe(
-            map((data) => {
+            map(() => {
               this.store.dispatch(setLoadingSpinner({ status: false }));
               this.store.dispatch(setErrorMessage({ message: '' }));
               return signupSuccess();
@@ -111,9 +111,8 @@ export class AuthEffects {
   autoLogin$ = createEffect(() => {
     return this.action$.pipe(
       ofType(autoLogin),
-      mergeMap((action) => {
+      mergeMap(() => {
         const user = this.authService.getUserFromLocal();
-        console.log(user, 'from autologin effect');
         if (user) {
           return of(loginSuccess({ user }));
         }
@@ -125,7 +124,7 @@ export class AuthEffects {
     () => {
       return this.action$.pipe(
         ofType(autoLogout),
-        map((action) => {
+        map(() => {
           this.authService.logout();
           this.router.navigate(['/auth']);
         })

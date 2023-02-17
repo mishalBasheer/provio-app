@@ -6,6 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./error-dialog.component.css'],
 })
 export class ErrorDialogComponent {
-  constructor() {}
   @Input() errMsg!: string | null;
 }

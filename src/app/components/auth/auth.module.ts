@@ -6,13 +6,9 @@ import {
 } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
 import { NavToSigninComponent } from './nav-to-signin/nav-to-signin.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
-import { AuthEffects } from './state/auth.effects';
-import { AuthReducer } from './state/auth.reducer';
-import { AUTH_STATE_NAME } from './state/auth.selector';
 
 const routes: Routes = [
   {

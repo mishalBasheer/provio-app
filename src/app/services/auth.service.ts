@@ -6,11 +6,11 @@ import {
   AuthResponseData,
   SignUpData,
   SignUpResponseData,
-} from 'src/app/modals/auth.modal';
-import { User } from 'src/app/modals/user.modal';
+} from 'src/app/models/auth.model';
+import { User } from 'src/app/models/user.model';
 import { AppState } from 'src/app/store/app.state';
 import { environment } from 'src/environments/environment';
-import { autoLogout } from './state/auth.action';
+import { autoLogout } from '../components/auth/state/auth.action';
 
 @Injectable({
   providedIn: 'root',
