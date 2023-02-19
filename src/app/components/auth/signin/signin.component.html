@@ -1,22 +1,22 @@
 <div
-  class="relative md:h-screen flex-1 items-center content-center bg-light"
+  class="relative h-screen flex-1 items-center content-center bg-light"
 >
-  <div class="mr-auto ml-auto w-full py-16">
+  <div class="mr-auto ml-auto w-10/12 md:w-2/3 lg:w-7/12 xl:w-1/3 py-16">
     <div
-      class="bg-secondary w-1/3 mr-auto ml-auto rounded-3xl shadow-2xl shadow-cyan-900"
+      class="bg-secondary mr-auto ml-auto rounded-3xl shadow-2xl shadow-cyan-900"
     >
-      <div class="w-full max-w-md mr-auto ml-auto justify-center pt-16">
-        <div class="w-2/3 mr-auto ml-auto flex justify-center gap-6">
-          <div class="w-3/12">
+      <div class="w-full max-w-md mr-auto ml-auto justify-center pt-5 sm:pt-16">
+        <div class="mr-auto ml-auto sm:flex sm:justify-center sm:gap-6">
+          <div class="w-16 md:w-3/12 mx-auto sm:mx-0  sm:block">
             <img src="/assets/images/logo.png" alt="" />
           </div>
-          <div class="flex items-center">
-            <p class="text-6xl color-light">Provio</p>
+          <div class="flex items-center justify-center">
+            <p class="text-5xl md:text-6xl color-light">Provio</p>
           </div>
         </div>
       </div>
-      <div class="w-full max-w-sm mr-auto ml-auto my-14">
-        <div class="px-3 pb-16 mb-4 ml-auto mr-auto">
+      <div class="w-full max-w-sm mr-auto ml-auto my-7 sm:my-14">
+        <div class="px-5 sm:px-10 pb-5 sm:pb-16 mb-4 ml-auto mr-auto">
           <form
             [formGroup]="signInForm"
             (ngSubmit)="onLogin()"
