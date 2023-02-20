@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { TaskComponent } from 'src/app/shared/dialog/task/task.component';
 import { getIsAuthenticated } from '../../auth/state/auth.selector';
 
 @Component({
@@ -10,8 +12,11 @@ import { getIsAuthenticated } from '../../auth/state/auth.selector';
 })
 export class HomeComponent implements OnInit {
   isAuthenticated!: Observable<boolean>;
-  constructor(private store: Store) {}
+  constructor(private store: Store,public dialog: MatDialog) {}
   ngOnInit(): void {
     this.isAuthenticated = this.store.select(getIsAuthenticated);
+  }
+  openDialog() {
+    this.dialog.open(TaskComponent);
   }
 }

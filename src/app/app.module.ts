@@ -15,9 +15,10 @@ import { AppReducer } from './store/app.state';
 import { ErrorDialogComponent } from './shared/error-dialog/error-dialog.component';
 import { MaterialModule } from './material/material.module';
 import { AuthEffects } from './components/auth/state/auth.effects';
+import { TaskComponent } from './shared/dialog/task/task.component';
 
 @NgModule({
-  declarations: [AppComponent, LandingPageComponent, LodingSpinnerComponent, ErrorDialogComponent],
+  declarations: [AppComponent, LandingPageComponent, LodingSpinnerComponent, ErrorDialogComponent, TaskComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

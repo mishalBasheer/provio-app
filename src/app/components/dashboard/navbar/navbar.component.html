@@ -93,34 +93,13 @@
             </div>
 
             <div class="relative inline-block text-left">
-              <button
-                type="button"
-                class="inline-flex w-full justify-center"
-                id="menu-button"
-                aria-expanded="true"
-                aria-haspopup="true"
-              >
+              <button mat-button [matMenuTriggerFor]="menu">
                 <mat-icon class="flex-auto color-light">expand_more</mat-icon>
               </button>
-              <div
-                class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                role="menu"
-                aria-orientation="vertical"
-                aria-labelledby="menu-button"
-                tabindex="-1"
-              >
-                <div class="py-1" role="none">
-                  <button
-                    class="text-gray-700 block w-full px-4 py-2 text-left text-sm"
-                    role="menuitem"
-                    tabindex="-1"
-                    id="menu-item-3"
-                    (click)="onLogout($event)"
-                  >
-                    Sign out
-                  </button>
-                </div>
-              </div>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="onLogout($event)">Logout</button>
+                <button mat-menu-item>Profile</button>
+              </mat-menu>
             </div>
           </li>
         </ul>
