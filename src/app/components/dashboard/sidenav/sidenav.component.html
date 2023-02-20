@@ -2,7 +2,7 @@
 <mat-drawer-container class="example-container">
   <mat-drawer #drawer mode="side" opened class="bg-white">
     <div
-      class="overflow-hidden bg-secondary w-44 h-auto ml-3 my-3 py-5 rounded-l-lg rounded-br-lg"
+      class="overflow-hidden hidden sm:block bg-secondary w-44 h-auto ml-3 my-3 py-5 rounded-l-lg rounded-br-lg"
     >
       <ul class="color-accent font-light">
         <li>
@@ -39,7 +39,7 @@
     <router-outlet></router-outlet>
     <button
       (click)="drawer.toggle()"
-      class="absolute top-0 my-3 bg-secondary color-light text-xs font-thin h-20 rounded-r-lg"
+      class="absolute hidden sm:block top-0 my-3 bg-secondary color-light text-xs font-thin h-20 rounded-r-lg"
     >
       <mat-icon>chevron_right</mat-icon>
     </button>
