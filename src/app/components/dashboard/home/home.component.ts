@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
     this.isAuthenticated = this.store.select(getIsAuthenticated);
   }
   openDialog() {
+    // this.store.dispatch(openTask())
     this.dialog.open(TaskComponent);
   }
 }
