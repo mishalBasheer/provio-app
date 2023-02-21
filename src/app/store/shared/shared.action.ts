@@ -1,5 +1,4 @@
 import { createAction, props } from '@ngrx/store';
-import { SharedState } from './shared.state';
 
 export const SET_LOADING_ACTION =
   '[shared state] set loading spinner';

@@ -9,16 +9,23 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LodingSpinnerComponent } from './shared/loding-spinner/loding-spinner.component';
 import { AppReducer } from './store/app.state';
 import { ErrorDialogComponent } from './shared/error-dialog/error-dialog.component';
 import { MaterialModule } from './material/material.module';
 import { AuthEffects } from './components/auth/state/auth.effects';
 import { TaskComponent } from './shared/dialog/task/task.component';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
 
 @NgModule({
-  declarations: [AppComponent, LandingPageComponent, LodingSpinnerComponent, ErrorDialogComponent, TaskComponent],
+  declarations: [
+    AppComponent,
+    LandingPageComponent,
+    LodingSpinnerComponent,
+    ErrorDialogComponent,
+    TaskComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -32,7 +39,9 @@ import { TaskComponent } from './shared/dialog/task/task.component';
       logOnly: !isDevMode(),
     }),
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

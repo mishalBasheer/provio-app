@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { TaskState } from '../components/dashboard/tasks/state/tasks.state';
+import { OrgState } from '../components/dashboard/orgs/state/orgs.state';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +13,8 @@ export class WorkspaceService {
   getAllTasksOfBoard(id: string) {
     return this.http.get(environment.apiUrl + `user/boards/${id}`);
   }
-  getAllOrgs() {
-    return this.http.get(environment.apiUrl + 'user/orgs');
+  getAllOrgs():Observable<{orgs:OrgState[],userid:string}> {
+    return this.http.get<{orgs:OrgState[],userid:string}>(environment.apiUrl + 'user/orgs');
   }
   getAllProjects() {
     return this.http.get(environment.apiUrl + 'user/projects');

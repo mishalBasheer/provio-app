@@ -1,3 +1,5 @@
+import { Role } from "src/app/models/role.model";
+
 export interface TaskState {
   id: string;
   title: string;
@@ -15,12 +17,6 @@ export enum Priority {
   HIGH = 'HIGH',
   MEDIUM = 'MEDIUM',
   LOW = 'LOW',
-}
-export enum Role {
-  ADMIN = 'ADMIN',
-  SUPER_ADMIN = 'SUPER_ADMIN',
-  MEMBER = 'MEMBER',
-  OBSERVER = 'OBSERVER',
 }
 export const initialState: TaskState = {
   id: '',
