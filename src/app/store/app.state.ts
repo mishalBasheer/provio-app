@@ -4,6 +4,9 @@ import { AuthState } from "../components/auth/state/auth.state";
 import { orgsReducer } from "../components/dashboard/orgs/state/orgs.reducer";
 import { ORG_STATE_NAME } from "../components/dashboard/orgs/state/orgs.selector";
 import { OrgsState } from "../components/dashboard/orgs/state/orgs.state";
+import { ProjectsReducer } from "../components/dashboard/projects/state/projects.reducer";
+import { PROJECT_STATE_NAME } from "../components/dashboard/projects/state/projects.selector";
+import { ProjectsState } from "../components/dashboard/projects/state/projects.state";
 import { WorkspaceReducer } from "../components/dashboard/state/workspace.reducer";
 import { WORKSPACE_STATE_NAME } from "../components/dashboard/state/workspace.selector";
 import { WorkspaceState } from "../components/dashboard/state/workspace.state";
@@ -16,6 +19,7 @@ export interface AppState {
     [AUTH_STATE_NAME]:AuthState;
     [WORKSPACE_STATE_NAME]:WorkspaceState;
     [ORG_STATE_NAME]:OrgsState;
+    [PROJECT_STATE_NAME]:ProjectsState;
     
 }
 export const AppReducer={
@@ -23,4 +27,5 @@ export const AppReducer={
     [AUTH_STATE_NAME]:AuthReducer,
     [WORKSPACE_STATE_NAME]:WorkspaceReducer,
     [ORG_STATE_NAME]:orgsReducer,
+    [PROJECT_STATE_NAME]:ProjectsReducer,
 }

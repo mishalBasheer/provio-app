@@ -16,6 +16,9 @@ import { OrgEffects } from './orgs/state/orgs.effects';
 import { orgsReducer } from './orgs/state/orgs.reducer';
 import { ORG_STATE_NAME } from './orgs/state/orgs.selector';
 import { ProjectsComponent } from './projects/projects.component';
+import { ProjectEffects } from './projects/state/projects.effects';
+import { ProjectsReducer } from './projects/state/projects.reducer';
+import { PROJECT_STATE_NAME } from './projects/state/projects.selector';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { WorkspaceReducer } from './state/workspace.reducer';
 import { WORKSPACE_STATE_NAME } from './state/workspace.selector';
@@ -58,7 +61,8 @@ const routes: Routes = [
     MaterialModule,
     StoreModule.forFeature(WORKSPACE_STATE_NAME, WorkspaceReducer),
     StoreModule.forFeature(ORG_STATE_NAME, orgsReducer),
-    EffectsModule.forFeature([OrgEffects]),
+    StoreModule.forFeature(PROJECT_STATE_NAME, ProjectsReducer),
+    EffectsModule.forFeature([OrgEffects,ProjectEffects]),
     RouterModule.forChild(routes),
   ],
 })

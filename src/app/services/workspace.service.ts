@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { TaskState } from '../components/dashboard/tasks/state/tasks.state';
 import { OrgState } from '../components/dashboard/orgs/state/orgs.state';
 import { Observable } from 'rxjs';
+import { ProjectState } from '../components/dashboard/projects/state/projects.state';
 
 @Injectable({
   providedIn: 'root',
@@ -16,8 +17,8 @@ export class WorkspaceService {
   getAllOrgs():Observable<{orgs:OrgState[],userid:string}> {
     return this.http.get<{orgs:OrgState[],userid:string}>(environment.apiUrl + 'user/orgs');
   }
-  getAllProjects() {
-    return this.http.get(environment.apiUrl + 'user/projects');
+  getAllProjects():Observable<{project:ProjectState[]}> {
+    return this.http.get<{project:ProjectState[]}>(environment.apiUrl + 'user/projects');
   }
   getAllBoards() {
     return this.http.get(environment.apiUrl + 'user/boards');
