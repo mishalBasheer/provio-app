@@ -1,8 +1,8 @@
-import { OrgsState } from '../orgs/state/orgs.state';
+import { OrgState } from '../orgs/state/orgs.state';
 
 export interface WorkspaceState {
-  workspace: OrgsState;
+  org: OrgState | null;
 }
 export const initialState: WorkspaceState = {
-  workspace: { orgs: [] },
+  org: null,
 };

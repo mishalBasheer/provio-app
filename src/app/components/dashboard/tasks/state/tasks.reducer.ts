@@ -1,12 +1,7 @@
-import { createReducer, on } from "@ngrx/store";
-import { getAllOrgs } from "./tasks.action";
+import { createReducer } from "@ngrx/store";
 import { initialState } from "./tasks.state";
 
-const _tasksReducer=createReducer(initialState,on(getAllOrgs,(state)=>{
-    return {
-        ...state
-    }
-}))
+const _tasksReducer=createReducer(initialState)
 
 //want to add actions that can initialy load data
 //create the data for the action

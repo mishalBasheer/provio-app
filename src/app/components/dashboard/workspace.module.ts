@@ -20,6 +20,7 @@ import { ProjectEffects } from './projects/state/projects.effects';
 import { ProjectsReducer } from './projects/state/projects.reducer';
 import { PROJECT_STATE_NAME } from './projects/state/projects.selector';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { WorkspaceEffects } from './state/workspace.effects';
 import { WorkspaceReducer } from './state/workspace.reducer';
 import { WORKSPACE_STATE_NAME } from './state/workspace.selector';
 import { TasksComponent } from './tasks/tasks.component';
@@ -62,7 +63,7 @@ const routes: Routes = [
     StoreModule.forFeature(WORKSPACE_STATE_NAME, WorkspaceReducer),
     StoreModule.forFeature(ORG_STATE_NAME, orgsReducer),
     StoreModule.forFeature(PROJECT_STATE_NAME, ProjectsReducer),
-    EffectsModule.forFeature([OrgEffects,ProjectEffects]),
+    EffectsModule.forFeature([OrgEffects,ProjectEffects,WorkspaceEffects]),
     RouterModule.forChild(routes),
   ],
 })

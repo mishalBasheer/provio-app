@@ -1,7 +1,7 @@
-import { Role } from "src/app/models/role.model";
+import { Role } from 'src/app/models/role.model';
 
 export interface TaskState {
-  id: string;
+  _id: string;
   title: string;
   description: string;
   attachments?: [{ url: string }];
@@ -19,7 +19,7 @@ export enum Priority {
   LOW = 'LOW',
 }
 export const initialState: TaskState = {
-  id: '',
+  _id: '',
   title: '',
   description: '',
   priority: Priority.MEDIUM,

@@ -96,7 +96,7 @@
               <button mat-button [matMenuTriggerFor]="menu">
                 <mat-icon class="flex-auto color-light">expand_more</mat-icon>
               </button>
-              <mat-menu #menu="matMenu">
+              <mat-menu #menu="matMenu" class="bg-secondary">
                 <button mat-menu-item (click)="onLogout($event)">Logout</button>
                 <button mat-menu-item>Profile</button>
               </mat-menu>

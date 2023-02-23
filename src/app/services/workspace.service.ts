@@ -14,11 +14,15 @@ export class WorkspaceService {
   getAllTasksOfBoard(id: string) {
     return this.http.get(environment.apiUrl + `user/boards/${id}`);
   }
-  getAllOrgs():Observable<{orgs:OrgState[],userid:string}> {
-    return this.http.get<{orgs:OrgState[],userid:string}>(environment.apiUrl + 'user/orgs');
+  getAllOrgs(): Observable<{ orgs: OrgState[]; userid: string }> {
+    return this.http.get<{ orgs: OrgState[]; userid: string }>(
+      environment.apiUrl + 'user/orgs'
+    );
   }
-  getAllProjects():Observable<{project:ProjectState[]}> {
-    return this.http.get<{project:ProjectState[]}>(environment.apiUrl + 'user/projects');
+  getAllProjects(): Observable<{ project: ProjectState[] }> {
+    return this.http.get<{ project: ProjectState[] }>(
+      environment.apiUrl + 'user/projects'
+    );
   }
   getAllBoards() {
     return this.http.get(environment.apiUrl + 'user/boards');
@@ -34,5 +38,8 @@ export class WorkspaceService {
   }
   createTask(obj: TaskState) {
     return this.http.post(environment.apiUrl + 'user/tasks', obj);
+  }
+  getOrgData(): Observable<{ org: OrgState }> {
+    return this.http.get<{ org: OrgState }>(environment.apiUrl + 'user/org');
   }
 }

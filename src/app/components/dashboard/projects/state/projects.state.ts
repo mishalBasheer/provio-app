@@ -1,7 +1,7 @@
 import { Role } from 'src/app/models/role.model';
 
 export interface ProjectState {
-  id: string;
+ _id: string;
   title: string;
   description: string;
   members: Member[];

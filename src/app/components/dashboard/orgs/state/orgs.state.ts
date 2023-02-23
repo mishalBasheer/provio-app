@@ -1,7 +1,7 @@
 import { Role } from 'src/app/models/role.model';
 
 export interface OrgState {
-  id: string;
+  _id: string;
   name: string;
   description: string;
   members: Member[];
@@ -15,6 +15,6 @@ export interface Member {
   user: string;
   role: Role;
 }
-export const initialState: OrgsState = { 
-  orgs: []
+export const initialState: OrgsState = {
+  orgs: [],
 };
