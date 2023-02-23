@@ -9,7 +9,12 @@ import {
   setErrorMessage,
   setLoadingSpinner,
 } from 'src/app/store/shared/shared.action';
-import { requestOrgData, setOrgData } from './workspace.action';
+import {
+  createNewProject,
+  requestOrgData,
+  setOrgData,
+  startCreateNewProject,
+} from './workspace.action';
 
 @Injectable()
 export class WorkspaceEffects {
@@ -28,13 +33,38 @@ export class WorkspaceEffects {
       mergeMap(() => {
         return this.workspaceService.getOrgData().pipe(
           map((data) => {
-            
             //loading spinner set false
             this.store.dispatch(setLoadingSpinner({ status: false }));
             this.store.dispatch(setErrorMessage({ message: '' }));
 
             //trigger action SET_ORG_DATA
             return setOrgData({ org: data.org });
+          }),
+          catchError((errResponse) => {
+            this.store.dispatch(setLoadingSpinner({ status: false }));
+            const errorMsg = this.sharedService.getErroMsg(
+              errResponse.error.message
+            );
+            return of(setErrorMessage({ message: errorMsg }));
+          })
+        );
+      })
+    );
+  });
+
+  createNewProject$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(startCreateNewProject),
+      mergeMap((action) => {
+
+        return this.workspaceService.createNewProject(action).pipe(
+          map((data) => {
+            //loading spinner set false
+            this.store.dispatch(setLoadingSpinner({ status: false }));
+            this.store.dispatch(setErrorMessage({ message: '' }));
+
+            //set new project to state
+            return createNewProject({ project: data.data.project });
           }),
           catchError((errResponse) => {
             this.store.dispatch(setLoadingSpinner({ status: false }));

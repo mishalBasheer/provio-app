@@ -4,22 +4,22 @@
       <h1 class="text-xl font-medium">Projects</h1>
       <div class="container mt-4 mx-auto">
         <div class="">
-          <div class="flex">
-            <button
-              class="m-2 bg-accent color-light w-60 h-40 rounded-lg text-center"
-              (click)="openDialog()"
-            >
-              <mat-icon>add_box</mat-icon
-              ><span class="ml-2 align-middle">Add Project</span>
-            </button>
-            <div *ngIf="projects$" class="flex">
-              <div *ngFor="let project of projects$ | async">
-                <app-project-card
-                  [description]="project.description"
-                  [title]="project.title"
-                  [id]="project._id"
-                ></app-project-card>
-              </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div>
+              <button
+                class="m-2 bg-accent color-light w-60 h-40 rounded-lg text-center"
+                (click)="openDialog()"
+              >
+                <mat-icon>add_box</mat-icon
+                ><span class="ml-2 align-middle">Add Project</span>
+              </button>
+            </div>
+            <div *ngFor="let project of projects$ | async">
+              <app-project-card
+                [description]="project.description"
+                [title]="project.title"
+                [id]="project._id"
+              ></app-project-card>
             </div>
           </div>
         </div>

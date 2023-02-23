@@ -27,8 +27,14 @@ export class WorkspaceService {
   getAllBoards() {
     return this.http.get(environment.apiUrl + 'user/boards');
   }
-  createNewProject(obj: { title: string; description: string; org: string }) {
-    return this.http.post(environment.apiUrl + 'user/projects', obj);
+  createNewProject(project: {
+    title: string;
+    description: string;
+  }): Observable<{data:{regestered:boolean;project:ProjectState}}> {
+    return this.http.post<{data:{regestered:boolean;project:ProjectState}}>(environment.apiUrl + 'user/projects', {
+      title: project.title,
+      description: project.description,
+    });
   }
   createNewBoard(obj: { title: string; description: string; project: string }) {
     return this.http.post(environment.apiUrl + 'user/boards', obj);
