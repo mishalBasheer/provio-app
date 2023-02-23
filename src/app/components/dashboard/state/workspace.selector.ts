@@ -4,6 +4,7 @@ import { WorkspaceState } from './workspace.state';
 export const WORKSPACE_STATE_NAME = 'workspace';
 const getWorkspaceState =
   createFeatureSelector<WorkspaceState>(WORKSPACE_STATE_NAME);
-// export const getCurrent = createSelector(getWorkspaceState, (state) => {
-//   return state.current;
-// });
+export const getCurrentOrgName = createSelector(getWorkspaceState, (state) => {
+  return state.org?.name;
+});
+

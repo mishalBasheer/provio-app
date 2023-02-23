@@ -38,12 +38,18 @@ export class AuthService {
   }
   formatUser(data: AuthResponseData) {
     const expirationDate = data.expirationDate;
-    const user = new User(
-      data.user.name,
-      data.token,
-      data.user.userid,
-      expirationDate
-    );
+    const user: User = {
+      name: data.user.name,
+      token: data.token,
+      userid: data.user.userid,
+      expirationDate,
+    };
+    // new User(
+    //   data.user.name,
+    //   data.token,
+    //   data.user.userid,
+    //   expirationDate
+    // );
     return user;
   }
   setUserInLocal(user: User) {
@@ -51,7 +57,7 @@ export class AuthService {
     this.runTimeOutInterval(user);
   }
   runTimeOutInterval(user: User) {
-    const expirationDate = new Date(user.getExpirationTime()).getTime();
+    const expirationDate = new Date(user.expirationDate).getTime();
     const todaysDate = new Date().getTime();
     const expiresIn: number = expirationDate - todaysDate;
     this.timeoutInterval = setTimeout(() => {
@@ -65,12 +71,18 @@ export class AuthService {
       return null;
     }
     const userData = JSON.parse(userDataString);
-    const user = new User(
-      userData.name,
-      userData.token,
-      userData.userid,
-      userData.expirationDate
-    );
+    const user: User = {
+      name: userData.name,
+      token: userData.token,
+      userid: userData.userid,
+      expirationDate: userData.expirationDate,
+    };
+    // new User(
+    //   userData.name,
+    //   userData.token,
+    //   userData.userid,
+    //   userData.expirationDate
+    // );
     this.runTimeOutInterval(user);
     return user;
   }
