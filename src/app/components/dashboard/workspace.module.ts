@@ -6,8 +6,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { MaterialModule } from 'src/app/material/material.module';
-import { NormalButtonComponent } from '../reusable/buttons/normal-button/normal-button.component';
-import { TaskCardGroupComponent } from '../reusable/cards/task-card-group/task-card-group.component';
+import { NormalButtonComponent } from '../shared/buttons/normal-button/normal-button.component';
+import { BoardCardComponent } from '../shared/cards/board-card/board-card.component';
+import { ProjectCardComponent } from '../shared/cards/project-card/project-card.component';
+import { TaskCardGroupComponent } from '../shared/cards/task-card-group/task-card-group.component';
 import { BoardsComponent } from './boards/boards.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -49,10 +51,12 @@ const routes: Routes = [
     ProjectsComponent,
     SidenavComponent,
     TaskCardGroupComponent,
+    NormalButtonComponent,
     TasksComponent,
     UsersComponent,
-    NormalButtonComponent,
     NavbarComponent,
+    ProjectCardComponent,
+    BoardCardComponent,
   ],
   imports: [
     CommonModule,
@@ -63,7 +67,7 @@ const routes: Routes = [
     StoreModule.forFeature(WORKSPACE_STATE_NAME, WorkspaceReducer),
     StoreModule.forFeature(ORG_STATE_NAME, orgsReducer),
     StoreModule.forFeature(PROJECT_STATE_NAME, ProjectsReducer),
-    EffectsModule.forFeature([OrgEffects,ProjectEffects,WorkspaceEffects]),
+    EffectsModule.forFeature([OrgEffects, ProjectEffects, WorkspaceEffects]),
     RouterModule.forChild(routes),
   ],
 })

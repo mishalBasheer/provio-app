@@ -4,13 +4,13 @@ export interface TaskState {
   _id: string;
   title: string;
   description: string;
-  attachments?: [{ url: string }];
+  attachment?: [{ url: string }];
   checklist?: string[];
   comments?: string[];
   priority: Priority;
   assignees?: [{ user: string; role: Role }];
   due: Date;
-  board: string;
+  list: string;
 }
 export enum Priority {
   CRITICAL = 'CRITICAL',
@@ -24,5 +24,5 @@ export const initialState: TaskState = {
   description: '',
   priority: Priority.MEDIUM,
   due: new Date(),
-  board: '',
+  list: '',
 };

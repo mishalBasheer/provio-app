@@ -7,4 +7,6 @@ const getWorkspaceState =
 export const getCurrentOrgName = createSelector(getWorkspaceState, (state) => {
   return state.org?.name;
 });
-
+export const getOrgProjects = createSelector(getWorkspaceState,(state)=>{
+  return state.org?.projects;
+});

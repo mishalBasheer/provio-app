@@ -1,4 +1,5 @@
 import { Role } from 'src/app/models/role.model';
+import { ProjectState } from '../../projects/state/projects.state';
 
 export interface OrgState {
   _id: string;
@@ -6,7 +7,7 @@ export interface OrgState {
   description: string;
   members: Member[];
   invites?: Member[];
-  project?: string[];
+  projects?: ProjectState[];
 }
 export interface OrgsState {
   orgs: OrgState[];
