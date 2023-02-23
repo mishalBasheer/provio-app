@@ -7,19 +7,18 @@
           <div class="flex">
             <button
               class="m-2 bg-accent color-light w-60 h-40 rounded-lg text-center"
+              (click)="openDialog()"
             >
               <mat-icon>add_box</mat-icon
-              ><span class="ml-2 align-middle">Add Board</span>
+              ><span class="ml-2 align-middle">Add Project</span>
             </button>
-            <div *ngIf="projects" class="flex">
-              <div *ngFor="let project of projects | async">
-                <button>
-                  <app-project-card
-                    [description]="project.description"
-                    [title]="project.title"
-                    [id]="project._id"
-                  ></app-project-card>
-                </button>
+            <div *ngIf="projects$" class="flex">
+              <div *ngFor="let project of projects$ | async">
+                <app-project-card
+                  [description]="project.description"
+                  [title]="project.title"
+                  [id]="project._id"
+                ></app-project-card>
               </div>
             </div>
           </div>

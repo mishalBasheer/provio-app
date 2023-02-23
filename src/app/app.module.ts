@@ -15,7 +15,6 @@ import { AppReducer } from './store/app.state';
 import { ErrorDialogComponent } from './shared/error-dialog/error-dialog.component';
 import { MaterialModule } from './material/material.module';
 import { AuthEffects } from './components/auth/state/auth.effects';
-import { TaskComponent } from './shared/dialog/task/task.component';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 
 @NgModule({
@@ -24,7 +23,6 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
     LandingPageComponent,
     LodingSpinnerComponent,
     ErrorDialogComponent,
-    TaskComponent,
   ],
   imports: [
     BrowserModule,

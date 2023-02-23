@@ -17,7 +17,7 @@ import { getCurrentOrgName } from '../state/workspace.selector';
 })
 export class HomeComponent implements OnInit {
   isAuthenticated!: Observable<boolean>;
-  constructor(private store: Store<AppState>, public dialog: MatDialog) {}
+  constructor(private store: Store<AppState>) {}
   userName!: Observable<string | undefined>;
   orgName!: Observable<string | undefined>;
   ngOnInit(): void {
@@ -25,8 +25,5 @@ export class HomeComponent implements OnInit {
     this.userName = this.store.select(getUserName);
     this.orgName = this.store.select(getCurrentOrgName);
   }
-  openDialog() {
-    // this.store.dispatch(openTask())
-    this.dialog.open(TaskComponent);
-  }
+  
 }

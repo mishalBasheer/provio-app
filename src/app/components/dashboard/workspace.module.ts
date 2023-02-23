@@ -6,6 +6,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { MaterialModule } from 'src/app/material/material.module';
+import { ProjectComponent } from 'src/app/shared/dialog/project/project.component';
+import { TaskComponent } from 'src/app/shared/dialog/task/task.component';
 import { NormalButtonComponent } from '../shared/buttons/normal-button/normal-button.component';
 import { BoardCardComponent } from '../shared/cards/board-card/board-card.component';
 import { ProjectCardComponent } from '../shared/cards/project-card/project-card.component';
@@ -57,6 +59,8 @@ const routes: Routes = [
     NavbarComponent,
     ProjectCardComponent,
     BoardCardComponent,
+    TaskComponent,
+    ProjectComponent,
   ],
   imports: [
     CommonModule,
