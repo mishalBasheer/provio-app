@@ -1,5 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
-import { createNewProject, setOrgData } from './workspace.action';
+import {
+  createNewBoard,
+  createNewProject,
+  setOrgData,
+} from './workspace.action';
 import { initialState } from './workspace.state';
 
 const _workspaceReducer = createReducer(
@@ -12,7 +16,7 @@ const _workspaceReducer = createReducer(
   }),
   on(createNewProject, (state, action) => {
     console.log(action);
-    
+
     if (state.org?.projects) {
       return {
         ...state,
@@ -24,8 +28,33 @@ const _workspaceReducer = createReducer(
     }
     return {
       ...state,
+    };
+  }),
+  on(createNewBoard, (state, action) => {
+    if (state.org?.projects) {
+      const updatedProjects = state.org.projects.map((el) => {
+        if (el._id == action.project) {
+          if (el.boards) {
+            return {
+              ...el,
+              boards: [...el.boards, action.board],
+            };
+          }
+        }
+        return el;
+      });
+
+      return {
+        ...state,
+        org: {
+          ...state.org,
+          projects: updatedProjects,
+        },
+      };
     }
- 
+    return {
+      ...state,
+    };
   })
 );
 

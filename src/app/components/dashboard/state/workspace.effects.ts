@@ -10,9 +10,11 @@ import {
   setLoadingSpinner,
 } from 'src/app/store/shared/shared.action';
 import {
+  createNewBoard,
   createNewProject,
   requestOrgData,
   setOrgData,
+  startCreateNewBoard,
   startCreateNewProject,
 } from './workspace.action';
 
@@ -65,6 +67,31 @@ export class WorkspaceEffects {
 
             //set new project to state
             return createNewProject({ project: data.data.project });
+          }),
+          catchError((errResponse) => {
+            this.store.dispatch(setLoadingSpinner({ status: false }));
+            const errorMsg = this.sharedService.getErroMsg(
+              errResponse.error.message
+            );
+            return of(setErrorMessage({ message: errorMsg }));
+          })
+        );
+      })
+    );
+  });
+  createNewBoard$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(startCreateNewBoard),
+      mergeMap((action) => {
+
+        return this.workspaceService.createNewBoard(action).pipe(
+          map((data) => {
+            //loading spinner set false
+            this.store.dispatch(setLoadingSpinner({ status: false }));
+            this.store.dispatch(setErrorMessage({ message: '' }));
+
+            //set new board to state
+            return createNewBoard({ board: data.data.board,project:action.project });
           }),
           catchError((errResponse) => {
             this.store.dispatch(setLoadingSpinner({ status: false }));

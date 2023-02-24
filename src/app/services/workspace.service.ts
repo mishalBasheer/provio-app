@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { TaskState } from '../components/dashboard/tasks/state/tasks.state';
 import { OrgState } from '../components/dashboard/orgs/state/orgs.state';
 import { Observable } from 'rxjs';
-import { ProjectState } from '../components/dashboard/projects/state/projects.state';
+import { BoardState, ProjectState } from '../components/dashboard/projects/state/projects.state';
 
 @Injectable({
   providedIn: 'root',
@@ -36,8 +36,8 @@ export class WorkspaceService {
       description: project.description,
     });
   }
-  createNewBoard(obj: { title: string; description: string; project: string }) {
-    return this.http.post(environment.apiUrl + 'user/boards', obj);
+  createNewBoard(obj: { title: string; description: string; project: string }):Observable<{data:{board:BoardState,registered:boolean}}> {
+    return this.http.post<{data:{board:BoardState,registered:boolean}}>(environment.apiUrl + 'user/boards', obj);
   }
   createList(obj: { title: string; board: string }) {
     return this.http.post(environment.apiUrl + 'user/lists', obj);
