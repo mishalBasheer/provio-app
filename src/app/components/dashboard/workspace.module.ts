@@ -30,6 +30,8 @@ import { WorkspaceReducer } from './state/workspace.reducer';
 import { WORKSPACE_STATE_NAME } from './state/workspace.selector';
 import { TasksComponent } from './tasks/tasks.component';
 import { UsersComponent } from './users/users.component';
+import { BoardbyidComponent } from './boardbyid/boardbyid.component';
+import { ProjectbyidComponent } from './projectbyid/projectbyid.component';
 
 const routes: Routes = [
   {
@@ -42,6 +44,8 @@ const routes: Routes = [
       { path: 'projects', component: ProjectsComponent },
       { path: 'tasks', component: TasksComponent },
       { path: 'users', component: UsersComponent },
+      { path: 'project/:id', component: ProjectbyidComponent },
+      { path: 'project/:id/board/:id', component: BoardbyidComponent },
     ],
   },
 ];
@@ -63,6 +67,8 @@ const routes: Routes = [
     TaskComponent,
     ProjectComponent,
     BoardComponent,
+    BoardbyidComponent,
+    ProjectbyidComponent,
   ],
   imports: [
     CommonModule,
