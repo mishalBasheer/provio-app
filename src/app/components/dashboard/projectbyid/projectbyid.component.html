@@ -1,1 +1,41 @@
-<p>projectbyid works!</p>
+<section class="font-light mx-5 sm:mx-10 py-5 h-screen">
+  <div class="">
+    <div class="mb-10">
+      <h1 class="text-xl font-medium">{{ (project$ | async)?.title }}</h1>
+      <div class="container mt-4 mx-auto">
+        <div class="">
+          <div
+            class="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+          >
+            <div>
+              <button
+                class="m-2 bg-accent color-light w-60 h-40 rounded-lg text-center"
+                (click)="openDialog()"
+              >
+                <mat-icon>add_box</mat-icon
+                ><span class="ml-2 align-middle">Add Board</span>
+              </button>
+            </div>
+            <div *ngFor="let board of (project$ | async)?.boards">
+              <button
+                class="text-left"
+                [routerLink]="[
+                  '/workspace/project',
+                  projectid,
+                  'board',
+                  board._id
+                ]"
+              >
+                <app-board-card
+                  [description]="board.description"
+                  [title]="board.title"
+                  [id]="board._id"
+                ></app-board-card>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

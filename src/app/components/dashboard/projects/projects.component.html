@@ -15,11 +15,13 @@
               </button>
             </div>
             <div *ngFor="let project of projects$ | async">
-              <app-project-card
-                [description]="project.description"
-                [title]="project.title"
-                [id]="project._id"
-              ></app-project-card>
+              <button class="text-left" [routerLink]="['/workspace/project',project._id]" >
+                <app-project-card
+                  [description]="project.description"
+                  [title]="project.title"
+                  [id]="project._id"
+                ></app-project-card>
+              </button>
             </div>
           </div>
         </div>
@@ -27,3 +29,4 @@
     </div>
   </div>
 </section>
+
