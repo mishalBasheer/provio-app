@@ -45,7 +45,7 @@ const routes: Routes = [
       { path: 'tasks', component: TasksComponent },
       { path: 'users', component: UsersComponent },
       { path: 'project/:id', component: ProjectbyidComponent },
-      { path: 'project/:id/board/:id', component: BoardbyidComponent },
+      { path: 'project/:id/board/:boardid', component: BoardbyidComponent },
     ],
   },
 ];

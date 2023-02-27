@@ -1,1 +1,23 @@
-<p>boardbyid works!</p>
+<section class="font-light mx-5 sm:mx-10 py-5 h-screen">
+  <div class="">
+    <div class="mb-10">
+      <h1 class="text-xl font-medium">Board Title</h1>
+      <div class="container mt-4 mx-auto">
+        <div class="">
+          <div class="flex">
+            <div *ngFor="let list of (boards$ | async)?.list">
+              <div *ngFor="let task of list.task">
+                <div>
+                  <app-task-card-group
+                    [title]="task.title"
+                    [id]="task.description"
+                  ></app-task-card-group>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
