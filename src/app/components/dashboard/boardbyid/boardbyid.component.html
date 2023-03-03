@@ -1,22 +1,45 @@
 <section class="font-light mx-5 sm:mx-10 py-5 h-screen">
   <div class="">
     <div class="mb-10">
-      <h1 class="text-xl font-medium">Board Title</h1>
+      <h1 class="text-xl font-medium">{{ (boards$ | async)?.title }}</h1>
       <div class="container mt-4 mx-auto">
-        <div class="">
-          <div class="flex">
-            <div *ngFor="let list of (boards$ | async)?.list">
-              <div *ngFor="let task of list.task">
-                <div>
+        <div cdkDropListGroup class="flex-grow">
+          <div
+            *ngFor="let list of (boards$ | async)?.list; let i = index"
+            class="example-container bg-accent p-3 max-h-screen min-width-list rounded-md"
+          >
+            <h2>{{ list.title }}</h2>
+            <div *ngIf="list.task">
+              <div
+                cdkDropList
+                [cdkDropListData]="{ item: list.task, index: i }"
+                class="example-list"
+                (cdkDropListDropped)="drop($event)"
+              >
+                <div class="example-box" *ngFor="let task of list.task" cdkDrag>
                   <app-task-card-group
                     [title]="task.title"
-                    [id]="task.description"
+                    [id]="task._id"
+                    [priority]="task.priority"
+                    [assignees]="task.assignees"
+                    [due]="task.due"
+                    [checklist]="task.checklist"
                   ></app-task-card-group>
                 </div>
               </div>
             </div>
           </div>
+          <div
+            class="example-container bg-accent p-3 min-width-list rounded-md"
+          >
+            <h1>
+              {{newList?newList:"Create List"}}
+            </h1>
+            <input [(ngModel)]="newList" type="text" />
+            <button class="">Create</button>
+          </div>
         </div>
+        <!-- sample testing end -->
       </div>
     </div>
   </div>

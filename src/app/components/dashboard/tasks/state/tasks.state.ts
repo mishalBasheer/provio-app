@@ -8,9 +8,13 @@ export interface TaskState {
   checklist?: string[];
   comments?: string[];
   priority: Priority;
-  assignees?: [{ user: string; role: Role }];
+  assignees?: Assignee[];
   due: Date;
   list: string;
+}
+export interface Assignee{
+  user:string;
+  role:Role;
 }
 export enum Priority {
   CRITICAL = 'CRITICAL',

@@ -12,10 +12,14 @@ import {
 import {
   createNewBoard,
   createNewProject,
+  moveTasksInList,
   requestOrgData,
   setOrgData,
   startCreateNewBoard,
   startCreateNewProject,
+  startMoveTasksInList,
+  startTransferListItem,
+  transferListItem,
 } from './workspace.action';
 
 @Injectable()
@@ -58,7 +62,6 @@ export class WorkspaceEffects {
     return this.actions$.pipe(
       ofType(startCreateNewProject),
       mergeMap((action) => {
-
         return this.workspaceService.createNewProject(action).pipe(
           map((data) => {
             //loading spinner set false
@@ -83,7 +86,6 @@ export class WorkspaceEffects {
     return this.actions$.pipe(
       ofType(startCreateNewBoard),
       mergeMap((action) => {
-
         return this.workspaceService.createNewBoard(action).pipe(
           map((data) => {
             //loading spinner set false
@@ -91,7 +93,10 @@ export class WorkspaceEffects {
             this.store.dispatch(setErrorMessage({ message: '' }));
 
             //set new board to state
-            return createNewBoard({ board: data.data.board,project:action.project });
+            return createNewBoard({
+              board: data.data.board,
+              project: action.project,
+            });
           }),
           catchError((errResponse) => {
             this.store.dispatch(setLoadingSpinner({ status: false }));
@@ -101,6 +106,74 @@ export class WorkspaceEffects {
             return of(setErrorMessage({ message: errorMsg }));
           })
         );
+      })
+    );
+  });
+
+  moveTasksInList$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(startMoveTasksInList),
+      mergeMap((action) => {
+        const { boardId, currentList, currentIndex, previousIndex } = action;
+        return this.workspaceService
+          .moveTaskFromList(boardId, currentList, previousIndex, currentIndex)
+          .pipe(
+            map(() => {
+              //loading spinner set false
+              this.store.dispatch(setLoadingSpinner({ status: false }));
+              this.store.dispatch(setErrorMessage({ message: '' }));
+
+              //alter state of list
+              return moveTasksInList({
+                currentList,
+                previousIndex,
+                currentIndex,
+              });
+            }),
+            catchError((errResponse) => {
+              this.store.dispatch(setLoadingSpinner({ status: false }));
+              const errorMsg = this.sharedService.getErroMsg(
+                errResponse.error.message
+              );
+              return of(setErrorMessage({ message: errorMsg }));
+            })
+          );
+      })
+    );
+  });
+  transferTasks$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(startTransferListItem),
+      mergeMap((action) => {
+        return this.workspaceService
+          .transferTask(
+            action.boardId,
+            action.previousList,
+            action.currentList,
+            action.previousIndex,
+            action.currentIndex
+          )
+          .pipe(
+            map(() => {
+              //loading spinner set false
+              this.store.dispatch(setLoadingSpinner({ status: false }));
+              this.store.dispatch(setErrorMessage({ message: '' }));
+
+              return transferListItem({
+                previousList: action.previousList,
+                currentList: action.currentList,
+                previousIndex: action.previousIndex,
+                currentIndex: action.currentIndex,
+              });
+            }),
+            catchError((errResponse) => {
+              this.store.dispatch(setLoadingSpinner({ status: false }));
+              const errorMsg = this.sharedService.getErroMsg(
+                errResponse.error.message
+              );
+              return of(setErrorMessage({ message: errorMsg }));
+            })
+          );
       })
     );
   });

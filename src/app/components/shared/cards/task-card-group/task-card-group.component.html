@@ -3,18 +3,44 @@
 >
   <div class="m-3">
     <h2 class="text-lg mb-2">
-      Title 
+      {{ title }}
       <span
         class="text-sm text-teal-800 font-mono bg-teal-100 inline rounded-full px-2 align-top float-right animate-pulse"
-        >Tag</span
+        >{{ priority }}</span
       >
     </h2>
-    <p
-      class="font-light font-mono text-sm text-gray-700 hover:text-gray-900 transition-all duration-200"
-    >
-      Space, the final frontier. These are the voyages of
-      the Starship Enterprise. Its five-year mission: to
-      explore strange new worlds.
-    </p>
+    <div class="flex justify-between">
+      <div class="flex gap-1">
+        <div>
+          <button>
+            <mat-icon>view_headline</mat-icon>
+          </button>
+        </div>
+        <div>
+          <button>
+            <mat-icon>check_box</mat-icon>
+          </button>
+        </div>
+        <div>
+          <button>
+            <mat-icon>attachment</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="avatars">
+        <span class="avatar">
+          <img src="https://picsum.photos/70" />
+        </span>
+        <span class="avatar">
+          <img src="https://picsum.photos/80" />
+        </span>
+        <span class="avatar">
+          <img src="https://picsum.photos/90" />
+        </span>
+        <span class="avatar">
+          <img src="https://picsum.photos/100" />
+        </span>
+      </div>
+    </div>
   </div>
 </div>

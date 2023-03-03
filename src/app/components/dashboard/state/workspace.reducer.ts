@@ -1,8 +1,13 @@
 import { createReducer, on } from '@ngrx/store';
+import { ListState } from '../projects/state/projects.state';
+import { TaskState } from '../tasks/state/tasks.state';
 import {
   createNewBoard,
   createNewProject,
+  loadBoard,
+  moveTasksInList,
   setOrgData,
+  transferListItem,
 } from './workspace.action';
 import { initialState } from './workspace.state';
 
@@ -55,8 +60,98 @@ const _workspaceReducer = createReducer(
     return {
       ...state,
     };
+  }),
+  on(loadBoard, (state, action) => {
+    const board = state.org?.projects
+      ?.find((project) => {
+        return project._id === action.projectid;
+      })
+      ?.boards?.find((board) => {
+        return board._id === action.boardid;
+      });
+
+    if (board) {
+      return {
+        ...state,
+        board,
+      };
+    }
+    return {
+      ...state,
+    };
+  }),
+
+  //there was an error before because of the inproper maping and type error
+  //check whether the mapping is correct or not
+  on(moveTasksInList, (state, action) => {
+    const lists = state.board?.list?.map((list,index) => {
+      if (index === action.currentList && list.task) {
+        const listTask = swapArrayElements(
+          list.task,
+          action.previousIndex,
+          action.currentIndex
+        );
+        return {
+          ...list,
+          task: listTask,
+        };
+      }
+      return list;
+    });
+    if (state.board?.list && lists) {
+      return {
+        ...state,
+        board: { ...state.board, list: [...lists] },
+      };
+    }
+    return {
+      ...state,
+    };
+  }),
+  on(transferListItem, (state, action) => {
+    const taskToTransfer = state.board?.list?.[action.previousList]?.task?.[action.previousIndex];
+    const lists = state.board?.list?.map((list,index) => {
+      if (index === action.previousList) {
+        const tasks = list.task?.filter((task, index) =>index!==action.previousIndex);
+        if (tasks)
+          return {
+            ...list,
+            task: [...tasks],
+          };
+      }
+      if (index === action.currentList && taskToTransfer) {
+        if (list.task) {
+          return {
+            ...list,
+            task: [
+              ...list.task,
+              { ...taskToTransfer },
+            ],
+          };
+        }
+      }
+      return list;
+    });
+    if (state.board?.list && lists) {
+      return {
+        ...state,
+        board: { ...state.board, list: [...lists] },
+      };
+    }
+    return {
+      ...state,
+    };
   })
 );
+function swapArrayElements(arr: TaskState[], index1: number, index2: number) {
+  // Create a new array to avoid mutating the original array
+  const result = [...arr];
+
+  // Swap the elements at the given indices
+  [result[index1], result[index2]] = [result[index2], result[index1]];
+
+  return result;
+}
 
 export function WorkspaceReducer(state: any, action: any) {
   return _workspaceReducer(state, action);

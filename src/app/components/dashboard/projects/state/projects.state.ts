@@ -1,4 +1,5 @@
 import { Role } from 'src/app/models/role.model';
+import { BoardState } from '../../boardbyid/state/board.state';
 import { TaskState } from '../../tasks/state/tasks.state';
 
 export interface ProjectState {
@@ -9,17 +10,11 @@ export interface ProjectState {
   org: string;
   boards?: BoardState[];
 }
-export interface BoardState {
-  _id: string;
-  title: string;
-  description: string;
-  project:string;
-  list?: ListState[];
-}
+
 export interface ListState{
   _id: string;
   title: string;
-  board: string;
+  board: BoardState;
   task?: TaskState[];
 }
 export interface ProjectsState {
