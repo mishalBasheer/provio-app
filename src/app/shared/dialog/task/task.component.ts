@@ -9,6 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./task.component.css'],
 })
 export class TaskComponent implements OnInit {
+  title!:string;
   taskForm!: FormGroup;
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
   ngOnInit(): void {

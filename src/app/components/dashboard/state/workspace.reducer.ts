@@ -1,5 +1,4 @@
 import { createReducer, on } from '@ngrx/store';
-import { ListState } from '../projects/state/projects.state';
 import { TaskState } from '../tasks/state/tasks.state';
 import {
   createNewBoard,
@@ -84,7 +83,7 @@ const _workspaceReducer = createReducer(
   //there was an error before because of the inproper maping and type error
   //check whether the mapping is correct or not
   on(moveTasksInList, (state, action) => {
-    const lists = state.board?.list?.map((list,index) => {
+    const lists = state.board?.list?.map((list, index) => {
       if (index === action.currentList && list.task) {
         const listTask = swapArrayElements(
           list.task,
@@ -109,10 +108,13 @@ const _workspaceReducer = createReducer(
     };
   }),
   on(transferListItem, (state, action) => {
-    const taskToTransfer = state.board?.list?.[action.previousList]?.task?.[action.previousIndex];
-    const lists = state.board?.list?.map((list,index) => {
+    const taskToTransfer =
+      state.board?.list?.[action.previousList]?.task?.[action.previousIndex];
+    const lists = state.board?.list?.map((list, index) => {
       if (index === action.previousList) {
-        const tasks = list.task?.filter((task, index) =>index!==action.previousIndex);
+        const tasks = list.task?.filter(
+          (task, index) => index !== action.previousIndex
+        );
         if (tasks)
           return {
             ...list,
@@ -123,10 +125,7 @@ const _workspaceReducer = createReducer(
         if (list.task) {
           return {
             ...list,
-            task: [
-              ...list.task,
-              { ...taskToTransfer },
-            ],
+            task: [...list.task, { ...taskToTransfer }],
           };
         }
       }

@@ -1,5 +1,5 @@
 <div class="bg-secondary">
-  <h1 mat-dialog-title>Add Task</h1>
+  <h1 mat-dialog-title>{{ title ? title : 'Task Title' }}</h1>
   <div mat-dialog-content>
     <div class="w-full max-w-lg mr-auto ml-auto mt-8 sm:mt-10 md:mt-14">
       <form [formGroup]="taskForm" (ngSubmit)="newTaskSubmit()">
@@ -17,6 +17,7 @@
               id="title"
               type="text"
               formControlName="title"
+              [(ngModel)]="title"
             />
             <!-- title validation error showing -->
             <div
@@ -26,10 +27,11 @@
               "
             >
               <div *ngIf="taskForm.get('title')?.errors?.['required']">
-                last name is required
+                title is required
               </div>
             </div>
           </div>
+
           <!-- description -->
           <div class="mb-4 w-full">
             <label
@@ -59,6 +61,87 @@
             </div>
           </div>
 
+          <!-- priority -->
+          <div class="mb-4 w-full">
+            <h2>Priority</h2>
+            <div>
+              <ul
+                class="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              >
+                <li
+                  class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
+                >
+                  <div class="flex items-center pl-3">
+                    <input
+                      id="horizontal-list-radio-license"
+                      type="radio"
+                      value="CRITICAL"
+                      name="list-radio"
+                      class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                    />
+                    <label
+                      for="horizontal-list-radio-license"
+                      class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      >CRITICAL
+                    </label>
+                  </div>
+                </li>
+                <li
+                  class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
+                >
+                  <div class="flex items-center pl-3">
+                    <input
+                      id="horizontal-list-radio-id"
+                      type="radio"
+                      value="HIGH"
+                      name="list-radio"
+                      class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                    />
+                    <label
+                      for="horizontal-list-radio-id"
+                      class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      >HIGH</label
+                    >
+                  </div>
+                </li>
+                <li
+                  class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
+                >
+                  <div class="flex items-center pl-3">
+                    <input
+                      id="horizontal-list-radio-millitary"
+                      type="radio"
+                      value="MEDIUM"
+                      name="list-radio"
+                      class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                    />
+                    <label
+                      for="horizontal-list-radio-millitary"
+                      class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      >MEDIUM</label
+                    >
+                  </div>
+                </li>
+                <li class="w-full dark:border-gray-600">
+                  <div class="flex items-center pl-3">
+                    <input
+                      id="horizontal-list-radio-passport"
+                      type="radio"
+                      value="LOW"
+                      name="list-radio"
+                      class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                    />
+                    <label
+                      for="horizontal-list-radio-passport"
+                      class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      >LOW</label
+                    >
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
           <!-- assignees -->
           <div class="mb-4 w-full">
             <h2>Assignees</h2>
@@ -79,6 +162,7 @@
               </div>
             </div>
           </div>
+
           <!-- attachments -->
           <div class="mb-4 w-full">
             <h2>Attachments</h2>
@@ -86,7 +170,39 @@
               No attachments available. Drag and drop files in the modal to
               upload them. Allowed formats: jpg, png, pdf, txt, csv
             </p>
+            <div class="flex items-center justify-center w-full">
+              <label
+                for="dropzone-file"
+                class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+              >
+                <div
+                  class="flex flex-col items-center justify-center pt-5 pb-6"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="w-10 h-10 mb-3 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                    ></path>
+                  </svg>
+                  <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                    <span class="font-semibold">Click to upload</span> or drag
+                    and drop
+                  </p>
+                </div>
+                <input id="dropzone-file" type="file" class="hidden" />
+              </label>
+            </div>
           </div>
+
           <!-- checklist -->
           <div class="mb-4 w-full">
             <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">
@@ -175,7 +291,7 @@
                       placeholder="checklist"
                       required
                     />
-                    <button 
+                    <button
                       type="submit"
                       class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700"
                     >
@@ -186,11 +302,22 @@
               </li>
             </ul>
           </div>
-          <!-- commands -->
 
+          <!-- date picker -->
+          <div class="mb-4 w-full">
+            <input
+              type="date"
+              name=""
+              id=""
+              class="shadow-sm appearance-none border border-gray-400 rounded w-full py-4 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:border-indigo-300"
+            />
+          </div>
+
+          <!-- commands -->
           <div class="mt-10">
             <button
-              type="submit" mat-dialog-close
+              type="submit"
+              mat-dialog-close
               class="bg-accent max-h-10 hover:bg-cyan-600 shadow-lg text-white font-normal text-sm py-3 px-0 rounded text-center w-1/3 hover:bg-tertiary duration-200 transition-all"
             >
               Submit
@@ -204,3 +331,4 @@
     <button mat-button mat-dialog-close class="text-white">Close</button>
   </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/datepicker.min.js"></script>
