@@ -32,6 +32,7 @@ import { TasksComponent } from './tasks/tasks.component';
 import { UsersComponent } from './users/users.component';
 import { BoardbyidComponent } from './boardbyid/boardbyid.component';
 import { ProjectbyidComponent } from './projectbyid/projectbyid.component';
+import { AddTaskComponent } from 'src/app/shared/dialog/add-task/add-task.component';
 
 const routes: Routes = [
   {
@@ -69,6 +70,7 @@ const routes: Routes = [
     BoardComponent,
     BoardbyidComponent,
     ProjectbyidComponent,
+    AddTaskComponent,
   ],
   imports: [
     CommonModule,

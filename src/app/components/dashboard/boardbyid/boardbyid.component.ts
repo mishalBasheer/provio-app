@@ -1,12 +1,11 @@
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { AddTaskComponent } from 'src/app/shared/dialog/add-task/add-task.component';
+import { TaskComponent } from 'src/app/shared/dialog/task/task.component';
 import { AppState } from 'src/app/store/app.state';
 import { setLoadingSpinner } from 'src/app/store/shared/shared.action';
 import {
@@ -24,8 +23,12 @@ import { BoardState } from './state/board.state';
   styleUrls: ['./boardbyid.component.css'],
 })
 export class BoardbyidComponent implements OnInit {
-  newList!:string|undefined;
-  constructor(private _store: Store<AppState>, public route: ActivatedRoute) {}
+  newList!: string | undefined;
+  constructor(
+    private _store: Store<AppState>,
+    public route: ActivatedRoute,
+    public dialog: MatDialog
+  ) {}
   boards$!: Observable<BoardState | undefined>;
   private _boardid!: string;
   private _projectid!: string;
@@ -49,11 +52,22 @@ export class BoardbyidComponent implements OnInit {
   //give action to add list
   //give action to add task
 
-  drop(event: CdkDragDrop<{ item: TaskState[]; index: number }>) {
+  //task update dialog box popup
+  openDialog(id: string) {
+    this.dialog.open(TaskComponent, { data: { task: id } });
+  }
 
-    console.log(
-      event.container.data.index,event.previousContainer.data.index
-    );
+  openNewDialog(id: string) {
+    this.dialog.open(AddTaskComponent, {
+      data: {
+        list: id,
+      },
+    });
+  }
+
+  //drag and drop event handler
+  drop(event: CdkDragDrop<{ item: TaskState[]; index: number }>) {
+    console.log(event.container.data.index, event.previousContainer.data.index);
 
     if (event.previousContainer === event.container) {
       if (event.currentIndex !== event.previousIndex) {
@@ -67,25 +81,7 @@ export class BoardbyidComponent implements OnInit {
           })
         );
       }
-
-      // moveItemInArray(
-      //   event.container.data,
-      //   event.previousIndex,
-      //   event.currentIndex
-      // );
     } else {
-      // transferArrayItem(
-      //   event.previousContainer.data,
-      //   event.container.data,
-      //   event.previousIndex,
-      //   event.currentIndex
-      // );
-      // console.log(
-      //   event.previousContainer.data,
-      //   event.container.data,
-      //   event.previousIndex,
-      //   event.currentIndex
-      // );
       this._store.dispatch(setLoadingSpinner({ status: true }));
       this._store.dispatch(
         startTransferListItem({

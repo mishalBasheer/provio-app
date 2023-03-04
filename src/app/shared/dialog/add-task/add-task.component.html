@@ -1,0 +1,207 @@
+<div class="bg-secondary">
+    <h1 mat-dialog-title>Add Task</h1>
+    <div mat-dialog-content>
+      <div class="w-full max-w-lg mr-auto ml-auto mt-8 sm:mt-10 md:mt-14">
+        <form [formGroup]="newTaskForm" (ngSubmit)="newTaskSubmit()">
+          <div class="px-3 pb-8 ml-auto mr-auto">
+            <!-- title field -->
+            <div class="mb-4 w-full">
+              <label
+                class="block color-light text-sm font-light mb-1"
+                for="title"
+              >
+                Title
+              </label>
+              <input
+                class="shadow-sm appearance-none border border-gray-400 rounded w-full py-4 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:border-indigo-300 max-h-10"
+                id="title"
+                type="text"
+                formControlName="title"
+              />
+              <!-- title validation error showing -->
+              <div
+                class="text-red-400"
+                *ngIf="
+                  newTaskForm.get('title')?.touched && newTaskForm.get('title')?.invalid
+                "
+              >
+                <div *ngIf="newTaskForm.get('title')?.errors?.['required']">
+                  last name is required
+                </div>
+              </div>
+            </div>
+            <!-- description -->
+            <div class="mb-4 w-full">
+              <label
+                class="block color-light text-sm font-light mb-1"
+                for="description"
+              >
+                Description
+              </label>
+              <textarea
+                class="shadow-sm appearance-none border border-gray-400 rounded w-full py-4 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:border-indigo-300"
+                id="description"
+                type="text"
+                formControlName="description"
+                rows="10"
+              ></textarea>
+              <!-- description validation error showing -->
+              <div
+                class="text-red-400"
+                *ngIf="
+                  newTaskForm.get('description')?.touched &&
+                  newTaskForm.get('description')?.invalid
+                "
+              >
+                <div *ngIf="newTaskForm.get('description')?.errors?.['required']">
+                  description is required
+                </div>
+              </div>
+            </div>
+  
+            <!-- assignees -->
+            <div class="mb-4 w-full">
+              <h2>Assignees</h2>
+              <div>
+                <div class="avatars">
+                  <span class="avatar">
+                    <img src="https://picsum.photos/70" />
+                  </span>
+                  <span class="avatar">
+                    <img src="https://picsum.photos/80" />
+                  </span>
+                  <span class="avatar">
+                    <img src="https://picsum.photos/90" />
+                  </span>
+                  <span class="avatar">
+                    <img src="https://picsum.photos/100" />
+                  </span>
+                </div>
+              </div>
+            </div>
+            <!-- attachments -->
+            <div class="mb-4 w-full">
+              <h2>Attachments</h2>
+              <p>
+                No attachments available. Drag and drop files in the modal to
+                upload them. Allowed formats: jpg, png, pdf, txt, csv
+              </p>
+            </div>
+            <!-- checklist -->
+            <div class="mb-4 w-full">
+              <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">
+                Checklist
+              </h3>
+              <ul
+                class="w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              >
+                <li
+                  class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600"
+                >
+                  <div class="flex items-center pl-3">
+                    <input
+                      id="vue-checkbox"
+                      type="checkbox"
+                      value=""
+                      class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                    />
+                    <label
+                      for="vue-checkbox"
+                      class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      >Vue JS</label
+                    >
+                  </div>
+                </li>
+                <li
+                  class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600"
+                >
+                  <div class="flex items-center pl-3">
+                    <input
+                      id="react-checkbox"
+                      type="checkbox"
+                      value=""
+                      class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                    />
+                    <label
+                      for="react-checkbox"
+                      class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      >React</label
+                    >
+                  </div>
+                </li>
+                <li
+                  class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600"
+                >
+                  <div class="flex items-center pl-3">
+                    <input
+                      id="angular-checkbox"
+                      type="checkbox"
+                      value=""
+                      class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                    />
+                    <label
+                      for="angular-checkbox"
+                      class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      >Angular</label
+                    >
+                  </div>
+                </li>
+                <li
+                  class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600"
+                >
+                  <div class="flex items-center pl-3">
+                    <input
+                      id="laravel-checkbox"
+                      type="checkbox"
+                      value=""
+                      class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                    />
+                    <label
+                      for="laravel-checkbox"
+                      class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                      >Laravel</label
+                    >
+                  </div>
+                </li>
+                <li
+                  class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600"
+                >
+                  <div class="flex items-center">
+                    <div class="relative">
+                      <input
+                        type="text"
+                        id="checklist"
+                        class="block w-full p-4 text-sm text-gray-900 rounded-lg bg-gray-50 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white"
+                        placeholder="checklist"
+                        required
+                      />
+                      <button 
+                        type="submit"
+                        class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700"
+                      >
+                        add
+                      </button>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <!-- commands -->
+  
+            <div class="mt-10">
+              <button
+                type="submit" mat-dialog-close
+                class="bg-accent max-h-10 hover:bg-cyan-600 shadow-lg text-white font-normal text-sm py-3 px-0 rounded text-center w-1/3 hover:bg-tertiary duration-200 transition-all"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button mat-dialog-close class="text-white">Close</button>
+    </div>
+  </div>
+  

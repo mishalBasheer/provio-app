@@ -3,10 +3,10 @@
     <div class="mb-10">
       <h1 class="text-xl font-medium">{{ (boards$ | async)?.title }}</h1>
       <div class="container mt-4 mx-auto">
-        <div cdkDropListGroup class="flex-grow">
+        <div cdkDropListGroup class="scroll-images flex-grow flex-wrap">
           <div
             *ngFor="let list of (boards$ | async)?.list; let i = index"
-            class="example-container bg-accent p-3 max-h-screen min-width-list rounded-md"
+            class="example-container bg-accent p-3 max-h-screen min-width-list rounded-md child"
           >
             <h2>{{ list.title }}</h2>
             <div *ngIf="list.task">
@@ -17,26 +17,41 @@
                 (cdkDropListDropped)="drop($event)"
               >
                 <div class="example-box" *ngFor="let task of list.task" cdkDrag>
-                  <app-task-card-group
-                    [title]="task.title"
-                    [id]="task._id"
-                    [priority]="task.priority"
-                    [assignees]="task.assignees"
-                    [due]="task.due"
-                    [checklist]="task.checklist"
-                  ></app-task-card-group>
+                  <button (click)="openDialog(task._id)">
+                    <app-task-card-group
+                      [title]="task.title"
+                      [id]="task._id"
+                      [priority]="task.priority"
+                      [assignees]="task.assignees"
+                      [due]="task.due"
+                      [checklist]="task.checklist"
+                    ></app-task-card-group>
+                  </button>
                 </div>
+                <button (click)="openNewDialog(list._id)"
+                  class="bg-primary color-light max-h-10 hover:bg-slate-400 hover:text-white shadow-lg color-primary font-normal text-sm py-3 px-5 rounded text-center hover:bg-tertiary duration-200 transition-all mt-2"
+                >
+                  add new Task
+                </button>
               </div>
             </div>
           </div>
           <div
-            class="example-container bg-accent p-3 min-width-list rounded-md"
+            class="example-container bg-accent p-3 min-width-list rounded-md child"
           >
             <h1>
-              {{newList?newList:"Create List"}}
+              {{ newList ? newList : 'Create List' }}
             </h1>
-            <input [(ngModel)]="newList" type="text" />
-            <button class="">Create</button>
+            <input
+              [(ngModel)]="newList"
+              type="text"
+              class="shadow-sm max-h-10 appearance-none border border-gray-400 rounded w-full py-4 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:border-indigo-300"
+            />
+            <button
+              class="bg-white max-h-10 hover:bg-slate-400 hover:text-white shadow-lg color-primary font-normal text-sm py-3 px-5 rounded text-center hover:bg-tertiary duration-200 transition-all mt-2"
+            >
+              Create
+            </button>
           </div>
         </div>
         <!-- sample testing end -->

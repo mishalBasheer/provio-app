@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 html{
-  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 html,
