@@ -12,11 +12,13 @@ import {
 import {
   createNewBoard,
   createNewProject,
+  createNewTask,
   moveTasksInList,
   requestOrgData,
   setOrgData,
   startCreateNewBoard,
   startCreateNewProject,
+  startCreateNewTask,
   startMoveTasksInList,
   startTransferListItem,
   transferListItem,
@@ -58,6 +60,7 @@ export class WorkspaceEffects {
     );
   });
 
+  //create new project
   createNewProject$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(startCreateNewProject),
@@ -82,6 +85,8 @@ export class WorkspaceEffects {
       })
     );
   });
+
+  //create new board
   createNewBoard$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(startCreateNewBoard),
@@ -110,6 +115,7 @@ export class WorkspaceEffects {
     );
   });
 
+  //move tasks within a list
   moveTasksInList$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(startMoveTasksInList),
@@ -141,6 +147,8 @@ export class WorkspaceEffects {
       })
     );
   });
+
+  //transfer tasks between lists
   transferTasks$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(startTransferListItem),
@@ -174,6 +182,32 @@ export class WorkspaceEffects {
               return of(setErrorMessage({ message: errorMsg }));
             })
           );
+      })
+    );
+  });
+  //transfer tasks between lists
+  createNewTask$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(startCreateNewTask),
+      mergeMap((action) => {
+        console.log(action);
+
+        return this.workspaceService.createTask(action.task).pipe(
+          map((data) => {
+            //loading spinner set false
+            this.store.dispatch(setLoadingSpinner({ status: false }));
+            this.store.dispatch(setErrorMessage({ message: '' }));
+
+            return createNewTask({ task: data.task });
+          }),
+          catchError((errResponse) => {
+            this.store.dispatch(setLoadingSpinner({ status: false }));
+            const errorMsg = this.sharedService.getErroMsg(
+              errResponse.error.message
+            );
+            return of(setErrorMessage({ message: errorMsg }));
+          })
+        );
       })
     );
   });

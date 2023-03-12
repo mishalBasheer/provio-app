@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { TaskState } from '../components/dashboard/tasks/state/tasks.state';
+import { CreateTaskState, TaskState } from '../components/dashboard/tasks/state/tasks.state';
 import { OrgState } from '../components/dashboard/orgs/state/orgs.state';
 import { Observable } from 'rxjs';
 import {
@@ -55,8 +55,8 @@ export class WorkspaceService {
   createList(obj: { title: string; board: string }) {
     return this.http.post(environment.apiUrl + 'user/lists', obj);
   }
-  createTask(obj: TaskState) {
-    return this.http.post(environment.apiUrl + 'user/tasks', obj);
+  createTask(obj: CreateTaskState):Observable<{task:TaskState}> {
+    return this.http.post<{task:TaskState}>(environment.apiUrl + 'user/tasks', obj);
   }
   getOrgData(): Observable<{ org: OrgState }> {
     return this.http.get<{ org: OrgState }>(environment.apiUrl + 'user/org');

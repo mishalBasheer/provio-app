@@ -1,16 +1,19 @@
 import { Role } from 'src/app/models/role.model';
 
-export interface TaskState {
-  _id: string;
+export interface CreateTaskState{
   title: string;
   description: string;
-  attachment?: [{ url: string }];
+  attachment?: string[];
   checklist?: string[];
   comments?: string[];
   priority: Priority;
   assignees?: Assignee[];
   due: Date;
   list: string;
+}
+
+export interface TaskState extends CreateTaskState {
+  _id: string;
 }
 export interface Assignee{
   user:string;

@@ -53,8 +53,8 @@ export class BoardbyidComponent implements OnInit {
   //give action to add task
 
   //task update dialog box popup
-  openDialog(id: string) {
-    this.dialog.open(TaskComponent, { data: { task: id } });
+  openDialog(listid: string, taskid: string) {
+    this.dialog.open(TaskComponent, { data: { listid, taskid } });
   }
 
   openNewDialog(id: string) {

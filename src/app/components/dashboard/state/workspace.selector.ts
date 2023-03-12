@@ -18,7 +18,12 @@ export const getProjectById = (id: string) =>
   createSelector(getWorkspaceState, (state) => {
     return state.org?.projects?.find((project) => project._id === id);
   });
-export const getBoardById =
+export const getBoardById = createSelector(getWorkspaceState, (state) => {
+  return state.board;
+});
+export const getTaskById = (listid: string, taskid: string) =>
   createSelector(getWorkspaceState, (state) => {
-    return state.board;
+    return state.board?.list
+      ?.find((list) => list._id === listid)
+      ?.task?.find((task) => task._id === taskid);
   });

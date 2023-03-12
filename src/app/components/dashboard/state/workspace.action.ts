@@ -2,6 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { BoardState } from '../boardbyid/state/board.state';
 import { OrgState } from '../orgs/state/orgs.state';
 import { ProjectState } from '../projects/state/projects.state';
+import { CreateTaskState, TaskState } from '../tasks/state/tasks.state';
 
 export const REQUEST_ORG_DATA = '[workspace] request org data';
 export const SET_ORG_DATA = '[workspace] set org data';
@@ -9,6 +10,8 @@ export const START_CREATE_NEW_PROJECT = '[workspace] start create new project';
 export const CREATE_NEW_PROJECT = '[workspace] create new project';
 export const START_CREATE_NEW_BOARD = '[workspace] start create new board';
 export const CREATE_NEW_BOARD = '[workspace] create new board';
+export const START_CREATE_NEW_TASK = '[workspace] start create new task';
+export const CREATE_NEW_TASK = '[workspace] create new task';
 
 export const LOAD_BOARD = '[workspace] load current board';
 
@@ -44,6 +47,20 @@ export const createNewBoard = createAction(
   props<{ board: BoardState; project: string }>()
 );
 
+//create new task
+export const startCreateNewTask = createAction(
+  START_CREATE_NEW_TASK,
+  props<{
+    task: CreateTaskState;
+  }>()
+);
+export const createNewTask = createAction(
+  CREATE_NEW_TASK,
+  props<{
+    task: TaskState;
+  }>()
+);
+
 //load current working board into the state
 export const loadBoard = createAction(
   LOAD_BOARD,
@@ -73,7 +90,7 @@ export const moveTasksInList = createAction(
 export const startTransferListItem = createAction(
   START_TRANSFER_LIST_ITEM,
   props<{
-    boardId:string,
+    boardId: string;
     previousList: number;
     currentList: number;
     previousIndex: number;

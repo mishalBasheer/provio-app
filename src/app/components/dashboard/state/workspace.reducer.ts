@@ -3,6 +3,7 @@ import { TaskState } from '../tasks/state/tasks.state';
 import {
   createNewBoard,
   createNewProject,
+  createNewTask,
   loadBoard,
   moveTasksInList,
   setOrgData,
@@ -112,7 +113,7 @@ const _workspaceReducer = createReducer(
       state.board?.list?.[action.previousList]?.task?.[action.previousIndex];
     const lists = state.board?.list?.map((list, index) => {
       if (index === action.previousList) {
-        const tasks = list.task?.filter(
+        const tasks: TaskState[] | undefined = list.task?.filter(
           (task, index) => index !== action.previousIndex
         );
         if (tasks)
@@ -130,6 +131,28 @@ const _workspaceReducer = createReducer(
         }
       }
       return list;
+    });
+    if (state.board?.list && lists) {
+      return {
+        ...state,
+        board: { ...state.board, list: [...lists] },
+      };
+    }
+    return {
+      ...state,
+    };
+  }),
+  //create new task in list
+  on(createNewTask, (state, action) => {
+    const newTask = action.task;
+    const lists = state.board?.list?.map((element) => {
+      if (element._id === action.task.list && element.task) {
+        return {
+          ...element,
+          task: [...element.task, newTask],
+        };
+      }
+      return element;
     });
     if (state.board?.list && lists) {
       return {
