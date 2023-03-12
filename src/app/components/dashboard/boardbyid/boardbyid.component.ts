@@ -1,5 +1,6 @@
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -10,6 +11,7 @@ import { AppState } from 'src/app/store/app.state';
 import { setLoadingSpinner } from 'src/app/store/shared/shared.action';
 import {
   loadBoard,
+  startCreateNewList,
   startMoveTasksInList,
   startTransferListItem,
 } from '../state/workspace.action';
@@ -32,6 +34,7 @@ export class BoardbyidComponent implements OnInit {
   boards$!: Observable<BoardState | undefined>;
   private _boardid!: string;
   private _projectid!: string;
+  createListForm!: FormGroup;
   openTaskDialog() {
     console.log('hello');
   }
@@ -47,6 +50,11 @@ export class BoardbyidComponent implements OnInit {
 
     //get board data as return from selector
     this.boards$ = this._store.select(getBoardById);
+
+    //create new list reactive form
+    this.createListForm = new FormGroup({
+      title: new FormControl(null, [Validators.required]),
+    });
   }
 
   //give action to add list
@@ -93,5 +101,17 @@ export class BoardbyidComponent implements OnInit {
         })
       );
     }
+  }
+
+  //create new list form submit
+  createListSubmit() {
+    if (this.createListForm.invalid) {
+      return;
+    }
+    const { title } = this.createListForm.value;
+    this._store.dispatch(setLoadingSpinner({ status: true }));
+    this._store.dispatch(
+      startCreateNewList({ list: { title, board: this._boardid } })
+    );
   }
 }

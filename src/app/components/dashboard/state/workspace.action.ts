@@ -1,7 +1,11 @@
 import { createAction, props } from '@ngrx/store';
 import { BoardState } from '../boardbyid/state/board.state';
 import { OrgState } from '../orgs/state/orgs.state';
-import { ProjectState } from '../projects/state/projects.state';
+import {
+  CreateListState,
+  ListState,
+  ProjectState,
+} from '../projects/state/projects.state';
 import { CreateTaskState, TaskState } from '../tasks/state/tasks.state';
 
 export const REQUEST_ORG_DATA = '[workspace] request org data';
@@ -12,6 +16,10 @@ export const START_CREATE_NEW_BOARD = '[workspace] start create new board';
 export const CREATE_NEW_BOARD = '[workspace] create new board';
 export const START_CREATE_NEW_TASK = '[workspace] start create new task';
 export const CREATE_NEW_TASK = '[workspace] create new task';
+export const START_UPDATE_TASK = '[workspace] start update new task';
+export const UPDATE_TASK = '[workspace] update new task';
+export const START_CREATE_NEW_LIST = '[workspace] start create new list';
+export const CREATE_NEW_LIST = '[workspace] create new list';
 
 export const LOAD_BOARD = '[workspace] load current board';
 
@@ -58,6 +66,19 @@ export const createNewTask = createAction(
   CREATE_NEW_TASK,
   props<{
     task: TaskState;
+  }>()
+);
+//create new task
+export const startCreateNewList = createAction(
+  START_CREATE_NEW_LIST,
+  props<{
+    list: CreateListState;
+  }>()
+);
+export const createNewList = createAction(
+  CREATE_NEW_LIST,
+  props<{
+    list: ListState;
   }>()
 );
 

@@ -1,6 +1,6 @@
 import { Role } from 'src/app/models/role.model';
 
-export interface CreateTaskState{
+export interface CreateTaskState {
   title: string;
   description: string;
   attachment?: string[];
@@ -15,9 +15,9 @@ export interface CreateTaskState{
 export interface TaskState extends CreateTaskState {
   _id: string;
 }
-export interface Assignee{
-  user:string;
-  role:Role;
+export interface Assignee {
+  user: string;
+  role: Role;
 }
 export enum Priority {
   CRITICAL = 'CRITICAL',

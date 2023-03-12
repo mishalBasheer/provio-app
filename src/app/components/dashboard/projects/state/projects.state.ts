@@ -10,11 +10,12 @@ export interface ProjectState {
   org: string;
   boards?: BoardState[];
 }
-
-export interface ListState{
-  _id: string;
+export interface CreateListState {
   title: string;
-  board: BoardState;
+  board: string;
+}
+export interface ListState extends CreateListState {
+  _id: string;
   task?: TaskState[];
 }
 export interface ProjectsState {

@@ -11,12 +11,14 @@ import {
 } from 'src/app/store/shared/shared.action';
 import {
   createNewBoard,
+  createNewList,
   createNewProject,
   createNewTask,
   moveTasksInList,
   requestOrgData,
   setOrgData,
   startCreateNewBoard,
+  startCreateNewList,
   startCreateNewProject,
   startCreateNewTask,
   startMoveTasksInList,
@@ -185,13 +187,12 @@ export class WorkspaceEffects {
       })
     );
   });
-  //transfer tasks between lists
+
+  //create new task
   createNewTask$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(startCreateNewTask),
       mergeMap((action) => {
-        console.log(action);
-
         return this.workspaceService.createTask(action.task).pipe(
           map((data) => {
             //loading spinner set false
@@ -208,6 +209,34 @@ export class WorkspaceEffects {
             return of(setErrorMessage({ message: errorMsg }));
           })
         );
+      })
+    );
+  });
+
+  //create new list in a board
+  createBoard$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(startCreateNewList),
+      mergeMap((action) => {
+        return this.workspaceService
+          .createList({ title: action.list.title, board: action.list.board })
+          .pipe(
+            map((data) => {
+              //loading spinner set false
+              this.store.dispatch(setLoadingSpinner({ status: false }));
+              this.store.dispatch(setErrorMessage({ message: '' }));
+
+              //changes the state
+              return createNewList({list:data.list});
+            }),
+            catchError((errResponse)=>{
+              this.store.dispatch(setLoadingSpinner({ status: false }));
+            const errorMsg = this.sharedService.getErroMsg(
+              errResponse.error.message
+            );
+            return of(setErrorMessage({ message: errorMsg }));
+            })
+          );
       })
     );
   });

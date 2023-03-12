@@ -5,6 +5,7 @@ import { CreateTaskState, TaskState } from '../components/dashboard/tasks/state/
 import { OrgState } from '../components/dashboard/orgs/state/orgs.state';
 import { Observable } from 'rxjs';
 import {
+  CreateListState,
   ListState,
   ProjectState,
 } from '../components/dashboard/projects/state/projects.state';
@@ -52,8 +53,8 @@ export class WorkspaceService {
       obj
     );
   }
-  createList(obj: { title: string; board: string }) {
-    return this.http.post(environment.apiUrl + 'user/lists', obj);
+  createList(obj: CreateListState):Observable<{list:ListState}> {
+    return this.http.post<{list:ListState}>(environment.apiUrl + 'user/lists', obj);
   }
   createTask(obj: CreateTaskState):Observable<{task:TaskState}> {
     return this.http.post<{task:TaskState}>(environment.apiUrl + 'user/tasks', obj);

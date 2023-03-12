@@ -42,7 +42,6 @@ export class AddTaskComponent implements OnInit {
     }
     const { title, description, priority, due } = this.newTaskForm.value;
     const attachment: string[] = [];
-    console.log({ title, description, priority, due });
     this._store.dispatch(setLoadingSpinner({ status: true }));
 
     if (this.fileArrayObject?.item) {
@@ -56,9 +55,7 @@ export class AddTaskComponent implements OnInit {
                 const fileuploadurl = res.urls[0];
                 const imageForm = new FormData();
                 const fileUrl = fileuploadurl.split('?')[0];
-                console.log(fileUrl);
 
-                // attachment = [...attachment, fileUrl];
                 attachment.push(fileUrl);
                 imageForm.append('file', this.fileArrayObject?.item(i) as Blob);
 
@@ -67,7 +64,6 @@ export class AddTaskComponent implements OnInit {
                   .subscribe((data: any) => {
                     if (this.fileArrayObject && data.ok)
                       if (i === this.fileArrayObject?.length - 1) {
-                        console.log('hello', i, data);
                         this.filesUrlArray = attachment;
                         this._store.dispatch(
                           startCreateNewTask({
@@ -107,7 +103,6 @@ export class AddTaskComponent implements OnInit {
     const FILES = files.target as HTMLInputElement;
     if (FILES.files?.length)
       for (let i = 0; i < FILES.files?.length; i++) {
-        
         if (FILES.files && FILES.files[i]) {
           const reader = new FileReader();
 
@@ -115,14 +110,11 @@ export class AddTaskComponent implements OnInit {
 
           reader.onload = (files) => {
             // called once readAsDataURL is completed
-            if (files.target?.result && typeof files.target.result ==='string')
+            if (files.target?.result && typeof files.target.result === 'string')
               this.filesUrlArray.push(files.target.result);
-              console.log(this.filesUrlArray);
-              
           };
         }
       }
     this.fileArrayObject = FILES.files;
-    console.log(this.fileArrayObject);
   }
 }

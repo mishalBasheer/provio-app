@@ -1,11 +1,11 @@
-<section class="font-light mx-5 sm:mx-10 py-5 h-screen">
+<section class="font-light mx-5 sm:mx-10 py-5 h-full">
   <div class="pb-20">
     <h1 class="text-xl font-medium">{{ (boards$ | async)?.title }}</h1>
-    <div class="container mt-4 mx-auto">
-      <div cdkDropListGroup class="scroll-images flex-grow flex-wrap">
+    <div class="container flex mt-4 mx-auto">
+      <div cdkDropListGroup class="flex flex-nowrap overflow-x-auto">
         <div
           *ngFor="let list of (boards$ | async)?.list; let i = index"
-          class="example-container bg-accent p-3 min-width-list rounded-md child"
+          class="example-container h-fit bg-accent p-3 min-width-list rounded-md child"
         >
           <h2>{{ list.title }}</h2>
           <div *ngIf="list.task">
@@ -37,24 +37,27 @@
           </div>
         </div>
         <div
-          class="example-container bg-accent p-3 min-width-list rounded-md child"
+          class="example-container h-fit bg-accent p-3 min-width-list rounded-md child"
         >
-          <h1>
-            {{ newList ? newList : 'Create List' }}
-          </h1>
-          <input
-            [(ngModel)]="newList"
-            type="text"
-            class="shadow-sm max-h-10 appearance-none border border-gray-400 rounded w-full py-4 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:border-indigo-300"
-          />
-          <button
-            class="bg-white max-h-10 hover:bg-slate-400 hover:text-white shadow-lg color-primary font-normal text-sm py-3 px-5 rounded text-center hover:bg-tertiary duration-200 transition-all mt-2"
-          >
-            Create
-          </button>
+          <form [formGroup]="createListForm" (ngSubmit)="createListSubmit()">
+            <h1>
+              {{ newList ? newList : 'Create List' }}
+            </h1>
+            <input
+              [(ngModel)]="newList"
+              formControlName="title"
+              type="text"
+              class="shadow-sm max-h-10 appearance-none border border-gray-400 rounded w-full py-4 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:border-indigo-300"
+            />
+            <button
+              class="bg-white max-h-10 hover:bg-slate-400 hover:text-white shadow-lg color-primary font-normal text-sm py-3 px-5 rounded text-center hover:bg-tertiary duration-200 transition-all mt-2"
+              type="submit"
+            >
+              Create
+            </button>
+          </form>
         </div>
       </div>
-      <!-- sample testing end -->
     </div>
   </div>
 </section>

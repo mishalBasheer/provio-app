@@ -2,6 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import { TaskState } from '../tasks/state/tasks.state';
 import {
   createNewBoard,
+  createNewList,
   createNewProject,
   createNewTask,
   loadBoard,
@@ -158,6 +159,19 @@ const _workspaceReducer = createReducer(
       return {
         ...state,
         board: { ...state.board, list: [...lists] },
+      };
+    }
+    return {
+      ...state,
+    };
+  }),
+  //create new list in board
+  on(createNewList, (state, action) => {
+    const newList = action.list;
+    if (newList && state.board?.list) {
+      return {
+        ...state,
+        board: { ...state.board, list: [...state.board.list, newList] },
       };
     }
     return {
