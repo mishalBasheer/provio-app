@@ -37,7 +37,10 @@ export class AddTaskComponent implements OnInit {
     });
   }
   newTaskSubmit() {
-    if (this.newTaskForm.invalid) {
+    if (
+      this.newTaskForm.invalid ||
+      !this.newTaskForm.value.title.trim().length
+    ) {
       return;
     }
     const { title, description, priority, due } = this.newTaskForm.value;

@@ -59,7 +59,7 @@ export class TaskComponent implements OnInit {
     });
   }
   updatedTaskSubmit() {
-    if (this.taskForm.invalid) {
+    if (this.taskForm.invalid || !this.taskForm.value.title.trim().length) {
       return;
     }
     const { title, description, priority, due } = this.taskForm.value;

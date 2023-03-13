@@ -5,19 +5,22 @@ import { Store } from '@ngrx/store';
 import { startCreateNewBoard } from 'src/app/components/dashboard/state/workspace.action';
 import { AppState } from 'src/app/store/app.state';
 
-export interface BoardDialogData{
-  project:string;
+export interface BoardDialogData {
+  project: string;
 }
 
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
-  styleUrls: ['./board.component.css']
+  styleUrls: ['./board.component.css'],
 })
 export class BoardComponent implements OnInit {
-  constructor(private store: Store<AppState>,@Inject(MAT_DIALOG_DATA) public data: BoardDialogData) {}
+  constructor(
+    private store: Store<AppState>,
+    @Inject(MAT_DIALOG_DATA) public data: BoardDialogData
+  ) {}
   boardForm!: FormGroup;
-  
+
   ngOnInit(): void {
     this.boardForm = new FormGroup({
       title: new FormControl(null, [Validators.required]),
@@ -25,14 +28,13 @@ export class BoardComponent implements OnInit {
     });
   }
   newBoardSubmit() {
-    if(this.boardForm.invalid){
+    if (this.boardForm.invalid || !this.boardForm.value.title.trim().length) {
       return;
     }
     const title = this.boardForm.value.title;
-    const description= this.boardForm.value.description;
+    const description = this.boardForm.value.description;
     const project = this.data.project;
 
-    this.store.dispatch(startCreateNewBoard({title,description,project}));
-    
+    this.store.dispatch(startCreateNewBoard({ title, description, project }));
   }
 }

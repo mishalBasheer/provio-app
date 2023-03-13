@@ -23,7 +23,7 @@ export class ProjectComponent implements OnInit {
     });
   }
   newProjectSubmit() {
-    if(this.projectForm.invalid){
+    if(this.projectForm.invalid || !this.projectForm.value.title.trim().length){
       return;
     }
     const title = this.projectForm.value.title;
