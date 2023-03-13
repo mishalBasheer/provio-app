@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { CreateTaskState, TaskState } from '../components/dashboard/tasks/state/tasks.state';
+import {
+  CreateTaskState,
+  TaskState,
+} from '../components/dashboard/tasks/state/tasks.state';
 import { OrgState } from '../components/dashboard/orgs/state/orgs.state';
 import { Observable } from 'rxjs';
 import {
@@ -53,11 +56,23 @@ export class WorkspaceService {
       obj
     );
   }
-  createList(obj: CreateListState):Observable<{list:ListState}> {
-    return this.http.post<{list:ListState}>(environment.apiUrl + 'user/lists', obj);
+  createList(obj: CreateListState): Observable<{ list: ListState }> {
+    return this.http.post<{ list: ListState }>(
+      environment.apiUrl + 'user/lists',
+      obj
+    );
   }
-  createTask(obj: CreateTaskState):Observable<{task:TaskState}> {
-    return this.http.post<{task:TaskState}>(environment.apiUrl + 'user/tasks', obj);
+  createTask(obj: CreateTaskState): Observable<{ task: TaskState }> {
+    return this.http.post<{ task: TaskState }>(
+      environment.apiUrl + 'user/tasks',
+      obj
+    );
+  }
+  updateTask(obj: TaskState): Observable<{ task: TaskState }> {
+    return this.http.patch<{ task: TaskState }>(
+      environment.apiUrl + 'user/tasks',
+      obj
+    );
   }
   getOrgData(): Observable<{ org: OrgState }> {
     return this.http.get<{ org: OrgState }>(environment.apiUrl + 'user/org');
@@ -74,7 +89,7 @@ export class WorkspaceService {
     );
   }
   transferTask(
-    boardId:string,
+    boardId: string,
     previousListIndex: number,
     currentListIndex: number,
     previousIndex: number,
@@ -82,7 +97,13 @@ export class WorkspaceService {
   ): Observable<{ regestered: boolean }> {
     return this.http.patch<{ regestered: boolean }>(
       environment.apiUrl + 'user/transfer_task',
-      { boardId, previousListIndex, currentListIndex, previousIndex, currentIndex }
+      {
+        boardId,
+        previousListIndex,
+        currentListIndex,
+        previousIndex,
+        currentIndex,
+      }
     );
   }
 }

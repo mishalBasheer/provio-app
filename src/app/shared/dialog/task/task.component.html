@@ -1,5 +1,5 @@
 <div class="bg-secondary">
-  <h1 mat-dialog-title>{{ 'hello' }}</h1>
+  <h1 mat-dialog-title>{{ ngModelTitle ? ngModelTitle : 'Task Title' }}</h1>
   <div mat-dialog-content>
     <div class="w-full max-w-lg mr-auto ml-auto mt-8 sm:mt-10 md:mt-14">
       <form [formGroup]="taskForm" (ngSubmit)="updatedTaskSubmit()">
@@ -18,6 +18,7 @@
               type="text"
               formControlName="title"
               placeholder=""
+              [(ngModel)]="ngModelTitle"
             />
             <!-- title validation error showing -->
             <div
@@ -202,9 +203,17 @@
                   id="dropzone-file"
                   type="file"
                   class="hidden"
-                  formControlName="attachment"
+                  multiple
+                  (change)="onFileChange($event)"
                 />
               </label>
+            </div>
+            <div class="flex gap-2 mt-2">
+              <img
+                *ngFor="let url of filesUrlArray"
+                [src]="url"
+                width="100px"
+              />
             </div>
           </div>
           <!-- checklist -->

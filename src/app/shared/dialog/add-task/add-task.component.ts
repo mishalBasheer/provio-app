@@ -64,7 +64,6 @@ export class AddTaskComponent implements OnInit {
                   .subscribe((data: any) => {
                     if (this.fileArrayObject && data.ok)
                       if (i === this.fileArrayObject?.length - 1) {
-                        this.filesUrlArray = attachment;
                         this._store.dispatch(
                           startCreateNewTask({
                             task: {

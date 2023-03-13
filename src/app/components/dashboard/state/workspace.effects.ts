@@ -23,7 +23,9 @@ import {
   startCreateNewTask,
   startMoveTasksInList,
   startTransferListItem,
+  startUpdateTask,
   transferListItem,
+  updateTask,
 } from './workspace.action';
 
 @Injectable()
@@ -212,6 +214,30 @@ export class WorkspaceEffects {
       })
     );
   });
+  //update task
+  updateTask$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(startUpdateTask),
+      mergeMap((action) => {
+        return this.workspaceService.updateTask(action.task).pipe(
+          map((data) => {
+            //loading spinner set false
+            this.store.dispatch(setLoadingSpinner({ status: false }));
+            this.store.dispatch(setErrorMessage({ message: '' }));
+
+            return updateTask({ task: data.task });
+          }),
+          catchError((errResponse) => {
+            this.store.dispatch(setLoadingSpinner({ status: false }));
+            const errorMsg = this.sharedService.getErroMsg(
+              errResponse.error.message
+            );
+            return of(setErrorMessage({ message: errorMsg }));
+          })
+        );
+      })
+    );
+  });
 
   //create new list in a board
   createBoard$ = createEffect(() => {
@@ -227,14 +253,14 @@ export class WorkspaceEffects {
               this.store.dispatch(setErrorMessage({ message: '' }));
 
               //changes the state
-              return createNewList({list:data.list});
+              return createNewList({ list: data.list });
             }),
-            catchError((errResponse)=>{
+            catchError((errResponse) => {
               this.store.dispatch(setLoadingSpinner({ status: false }));
-            const errorMsg = this.sharedService.getErroMsg(
-              errResponse.error.message
-            );
-            return of(setErrorMessage({ message: errorMsg }));
+              const errorMsg = this.sharedService.getErroMsg(
+                errResponse.error.message
+              );
+              return of(setErrorMessage({ message: errorMsg }));
             })
           );
       })

@@ -68,7 +68,21 @@ export const createNewTask = createAction(
     task: TaskState;
   }>()
 );
-//create new task
+//update new task
+export const startUpdateTask = createAction(
+  START_UPDATE_TASK,
+  props<{
+    task: TaskState;
+  }>()
+);
+export const updateTask = createAction(
+  UPDATE_TASK,
+  props<{
+    task: TaskState;
+  }>()
+);
+
+//create new list
 export const startCreateNewList = createAction(
   START_CREATE_NEW_LIST,
   props<{

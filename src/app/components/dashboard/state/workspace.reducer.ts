@@ -9,6 +9,7 @@ import {
   moveTasksInList,
   setOrgData,
   transferListItem,
+  updateTask,
 } from './workspace.action';
 import { initialState } from './workspace.state';
 
@@ -172,6 +173,34 @@ const _workspaceReducer = createReducer(
       return {
         ...state,
         board: { ...state.board, list: [...state.board.list, newList] },
+      };
+    }
+    return {
+      ...state,
+    };
+  }),
+  //update task
+  on(updateTask, (state, action) => {
+    const updatedTask = action.task;
+    const lists = state.board?.list?.map((element) => {
+      if (element._id === action.task.list && element.task) {
+        const newTaskArray = element.task.map((task) => {
+          if (task._id === updatedTask._id) {
+            return updatedTask;
+          }
+          return task;
+        });
+        return {
+          ...element,
+          task: newTaskArray,
+        };
+      }
+      return element;
+    });
+    if (state.board?.list && lists) {
+      return {
+        ...state,
+        board: { ...state.board, list: [...lists] },
       };
     }
     return {
